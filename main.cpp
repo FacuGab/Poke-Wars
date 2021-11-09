@@ -15,10 +15,8 @@ PAUTAS DE AL DEFINIR VARIALBES, OBJETOS, FUNCIONES, ETC:
 #include <cstring>
 #include <stdio.h>
 using namespace std;
-
 #include "Pokemon_class.h"
 #include "Stats_Ataques_class.h"
-#include "Funciones.h"
 #include "GameLoop.h"
 
 ///Main de Incio
@@ -29,7 +27,7 @@ int main()
     /// Creamos lista de Ataques para cada Pokemon:
     /// Obs: el fasle o true de los constructores no tiene uso por ahora.
     Ataque charizardAtaques[4] = { Ataque(false, "Tacle", 50, 25, NORMAL, 95),
-                                    Ataque(false, "Rasguño", 90, 10, FUEGO, 80),
+                                    Ataque(false, "RasguÃ±o", 90, 10, FUEGO, 80),
                                     Ataque(false, "Vuelo", 90, 10, NORMAL, 80),
                                     Ataque(true, "Lanzallamas", 90, 10, FUEGO, 80)};
 
