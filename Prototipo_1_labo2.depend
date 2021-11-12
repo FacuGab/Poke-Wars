@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1636658393 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\main.cpp
+	<iostream>
+	<clocale>
+	<cstring>
+	<stdio.h>
+	"Pokemon_class.h"
+	"Stats_Ataques_class.h"
+	"GameLoop.h"
+	"Funciones.h"
+
+1636648737 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\pokemon_class.cpp
+	<iostream>
+	<clocale>
+	<cstring>
+	<stdio.h>
+	<iomanip>
+	"Pokemon_class.h"
+	"Stats_Ataques_class.h"
+
+1636566606 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\pokemon_class.h
+	"Stats_Ataques_class.h"
+
+1636477891 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\stats_ataques_class.h
+	<cstring>
+
+1636323084 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\funciones.h
+
+1635609357 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\prototipos_clases.cpp
+
+1636223533 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\menu.h
+
+1636154583 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\menu.cpp
+	<string>
+	<string.h>
+	<iostream>
+	"Menu.h"
+
+1636478208 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\gameloop.h
+	"Pokemon_class.h"
+
+1636663665 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\gameloop.cpp
+	<iostream>
+	<time.h>
+	<stdlib.h>
+	<windows.h>
+	"GameLoop.h"
+	"Funciones.h"
+
+1636222455 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\archivo.cpp
+	<iostream>
+
+1636657138 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\funciones.h
+	<windows.h>
+
+1636657110 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\funciones.cpp
+	<iostream>
+	"Funciones.h"
+
