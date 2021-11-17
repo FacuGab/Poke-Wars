@@ -98,20 +98,3 @@ int main()
     return 0;
 }
 
-
-/*
-
-1- Elegir Pokemon
--> vemos lista
-otro menu:
-1- Ver estadisticas
--> si muestra:
-    cout << Nombre
-    cout << Ataques
-    cout << estadisticas
- elegir pokemon
- volver
-
-
-
-*/
