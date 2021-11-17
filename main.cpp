@@ -19,6 +19,7 @@ using namespace std;
 #include "Stats_Ataques_class.h"
 #include "GameLoop.h"
 #include "Funciones.h"
+#include "Jugador.h"
 
 ///Main de Incio
 int main()
@@ -28,7 +29,7 @@ int main()
     /// Creamos lista de Ataques para cada Pokemon:
     /// Obs: el fasle o true de los constructores no tiene uso por ahora.
     Ataque charizardAtaques[4] = { Ataque(false, "Tacle", 50, 25, NORMAL, 95),      //pos 0
-                                    Ataque(false, "Rasguño", 90, 10, FUEGO, 80),    //pos 1
+                                    Ataque(false, "RasguÃ±o", 90, 10, FUEGO, 80),    //pos 1
                                     Ataque(false, "Vuelo", 90, 10, NORMAL, 80),     //pos 2
                                     Ataque(true, "Lanzallamas", 90, 10, FUEGO, 80)};//pos 3
 
@@ -44,12 +45,11 @@ int main()
 
     // INICIO //
     int opc;
-    ///Menu de inicio:
     do
     {
+        ///Menu de inicio:
         system("cls");
         cout << endl;
-
         gotoxy(5, 2);
         cout << " ***JUEGO POKEMAIL***\n";
         cout << "  Ingrese Opcion: \n";
@@ -90,7 +90,6 @@ int main()
             break;
         }
         system("pause");
-
 
     }while(opc != 0);
     // ----- //
