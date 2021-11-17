@@ -30,8 +30,6 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
     srand (time(NULL));
     _pkJugador = &pok1;
     _pkRival = &pok2;
-    ///_vidaPkJugador = _pkJugador->getVida(); // reemplazar a vidaJugador ¿?
-    ///_vidaPkRival = _pkRival->getVida(); // reemplazar a vidaRival ¿?
     bool golpeo = false;
     int vidaJugador = _pkJugador->getVida();
     int vidaRival = _pkRival->getVida();
@@ -59,19 +57,19 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
         switch( asignarTurno() ) {
         /// TURNO JUGADOR:
         case 1:
-            cout << "····Turno Jugador····\n";
+            cout << "Â·Â·Â·Â·Turno JugadorÂ·Â·Â·Â·\n";
             setInput(); /// Input de Jugador
             if (_input == 0) {
                 quit = 0;
             } else if (_input == 1) {
-                ataquesJugador(vidaRival); /// Seleccion de Ataque y daño
+                ataquesJugador(vidaRival); /// Seleccion de Ataque y daÃ±o
             }
             break;
         /// TURNO RIVAL:
         case 0:
-            cout << "····Turno Rival····\n";
+            cout << "Â·Â·Â·Â·Turno RivalÂ·Â·Â·Â·\n";
             Sleep(500);
-            ataquesRival(vidaJugador); /// Ataque de rival y daño
+            ataquesRival(vidaJugador); /// Ataque de rival y daÃ±o
             break;
         }
         /// CONTROLAMOS VIDA Y SI DA TRUE, CONTROLAMOS QUIEN GANA Y SI CONTINUAN LOS COMBATES
@@ -140,10 +138,11 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
         cout << "1- Continuar Batalla\n";
         cout << "2- Salir de Batalla\n";
         setInput();
-        switch(getInput()) {
+        switch(getInput()) 
+        {
         case 1:
-            /// ·····································
-            /// Funcion o Metodo de eleccion de otro pokemon al que se puede acceder iria aca¿?
+            /// Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·
+            /// Funcion o Metodo de eleccion de otro pokemon al que se puede acceder iria acaÂ¿?
             /// Ej: redefinir con otro pokemon a eleccion los punteros _pkJugador y _pkRival
             /*
             Ejemplo de forma de eleccioon de otro pokemon tiene usando un vector para la elecion.
@@ -179,7 +178,7 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
                 _pkJugador = &pokedex[3];
                 break;
             }
-            /// ·····································
+            /// Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·
             vidaJugador = _pkJugador->getVida();
             vidaRival = _pkRival->getVida();
             _loop = -1;
@@ -208,7 +207,7 @@ int GameLoop::asignarTurno()
     }
 }
 
-/// CALCULAR DAÑO
+/// CALCULAR DAÃ‘O
 int GameLoop::calcularDanio(int danio, int defensa)
 {
 
@@ -220,7 +219,7 @@ int GameLoop::calcularDanio(int danio, int defensa)
     calculo = (danio /*-(aleatorio*10))*/ - (defensa * aleatorio));
     cout << "calculo de defnesa: "<< (defensa*aleatorio) << endl;
     cout << "calculo de potencia: "<< (danio -(aleatorio*10)) << endl;
-    cout << "pre-daño: " << calculo << endl;
+    cout << "pre-daÃ±o: " << calculo << endl;
     if( calculo > 10 ) {
         return calculo;
     } else {
@@ -259,9 +258,9 @@ void GameLoop::ataquesJugador(int &vidaPokRival)
     Sleep(400);
     if( _damage > 0 ) {
         vidaPokRival -= _damage;
-        cout << "Daño causado por Pokemon de Jugador: " << _damage << endl;
+        cout << "DaÃ±o causado por Pokemon de Jugador: " << _damage << endl;
     } else {
-        cout << "No causo Daño el ataque de Pokemon Jugador.\n";
+        cout << "No causo DaÃ±o el ataque de Pokemon Jugador.\n";
     }
 }
 
@@ -292,9 +291,9 @@ void GameLoop::ataquesRival(int &vidaPokJugador)
     Sleep(400);
     if( _damage > 0 ) {
         vidaPokJugador -= _damage;
-        cout << "Daño causado por Pokemon de Rival: " << _damage << endl;
+        cout << "DaÃ±o causado por Pokemon de Rival: " << _damage << endl;
     } else {
-        cout << "No causo Daño el ataque de Pokemon Rival.\n";
+        cout << "No causo DaÃ±o el ataque de Pokemon Rival.\n";
     }
 }
 
