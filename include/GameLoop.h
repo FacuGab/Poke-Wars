@@ -17,9 +17,11 @@ class GameLoop
          int asignarTurno();
          int calcularDanio(int p_danio, int p_defensa);
         bool controlVida(int p_vidaJugador, int p_vidaRival);
+        void siguienteBatalla(int &, int &, int &);
 
         /// GETS y SETS
-        void setInput();
+        void setInput(); /// pide por pantalla, no es un set normal
+        int getInput();
         int getGanador();
 
     private:

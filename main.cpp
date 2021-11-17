@@ -19,7 +19,7 @@ using namespace std;
 #include "Stats_Ataques_class.h"
 #include "GameLoop.h"
 #include "Funciones.h"
-#include"Jugador.h"
+#include "Jugador.h"
 
 ///Main de Incio
 int main()
@@ -45,12 +45,11 @@ int main()
 
     // INICIO //
     int opc;
-    ///Menu de inicio:
     do
     {
+        ///Menu de inicio:
         system("cls");
         cout << endl;
-
         gotoxy(5, 2);
         cout << " ***JUEGO POKEMAIL***\n";
         cout << "  Ingrese Opcion: \n";
@@ -77,6 +76,7 @@ int main()
             }
             break;
         case 2:
+            system("cls");
             cout << "En construccion (: \n";
             break;
         case 3:
@@ -91,10 +91,10 @@ int main()
         }
         system("pause");
 
-
     }while(opc != 0);
     // ----- //
     cout << endl;
     return 0;
 }
+
 

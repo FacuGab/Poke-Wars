@@ -1,7 +1,6 @@
 //Nombre: CLASE POKEMON
 
 #include <iostream>
-#include <clocale>
 #include <cstring>
 #include <stdio.h>
 #include <iomanip>

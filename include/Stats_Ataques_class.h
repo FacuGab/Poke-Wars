@@ -5,7 +5,6 @@
 ///ESTADOS:
 enum ESTADOS
 {
-
     Paralisis  = 0, ///(causado por un ataque de tipo Eléctrico)
 	Quemado    = 1, ///(causado por un ataque de tipo Fuego)
 	Envenenado = 2, ///(causado por un ataque de tipo Bicho)
