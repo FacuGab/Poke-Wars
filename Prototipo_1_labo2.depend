@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1636658393 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\main.cpp
+1637107302 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\main.cpp
 	<iostream>
 	<clocale>
 	<cstring>
@@ -9,9 +9,8 @@
 	"GameLoop.h"
 	"Funciones.h"
 
-1636648737 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\pokemon_class.cpp
+1637111430 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\pokemon_class.cpp
 	<iostream>
-	<clocale>
 	<cstring>
 	<stdio.h>
 	<iomanip>
@@ -21,7 +20,7 @@
 1636566606 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\pokemon_class.h
 	"Stats_Ataques_class.h"
 
-1636477891 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\stats_ataques_class.h
+1637111362 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\stats_ataques_class.h
 	<cstring>
 
 1636323084 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\funciones.h
@@ -36,24 +35,29 @@
 	<iostream>
 	"Menu.h"
 
-1636478208 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\gameloop.h
+1637105428 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\gameloop.h
 	"Pokemon_class.h"
 
-1636663665 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\gameloop.cpp
+1637114228 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\gameloop.cpp
 	<iostream>
 	<time.h>
 	<stdlib.h>
 	<windows.h>
 	"GameLoop.h"
 	"Funciones.h"
+	"Utiles.h"
 
 1636222455 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\archivo.cpp
 	<iostream>
 
-1636657138 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\funciones.h
+1637107385 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\funciones.h
 	<windows.h>
 
-1636657110 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\funciones.cpp
+1637110465 source:c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\src\funciones.cpp
 	<iostream>
 	"Funciones.h"
+
+1637111214 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\utiles.h
+
+1637112722 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\utiles.h
 

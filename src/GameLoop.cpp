@@ -6,9 +6,10 @@
 using namespace std;
 #include "GameLoop.h"
 #include "Funciones.h"
+#include "Utiles.h"
 
 
-//{ Constructor y Destructor:
+//{ Constructor y Destructor (sin usos por ahora):
 GameLoop::GameLoop()
 {
     //ctor
@@ -36,9 +37,10 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
     int vidaRival = _pkRival->getVida();
     int quit = 1;
 
-    //Loop:
-    while(quit != 0)
-    {
+    // Loop:
+    while(quit != 0) {
+
+        /// MENU DE BATALLA CON LOS STATS
         system("cls");
         cout << "\t BATALLA: \n";
         cout << "============================\n";
@@ -54,38 +56,42 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
         cout << " 1- Atacar\n 2- Pasar Turno\n 0- Salir\n";
 
         /// ASIGNAMOS TURNO:
-        switch( asignarTurno() )
-        {
-           /// TURNO JUGADOR:
+        switch( asignarTurno() ) {
+        /// TURNO JUGADOR:
         case 1:
-            cout << "Turno Jugador\n";
+            cout << "····Turno Jugador····\n";
             setInput(); /// Input de Jugador
             if (_input == 0) {
                 quit = 0;
             } else if (_input == 1) {
-
                 ataquesJugador(vidaRival); /// Seleccion de Ataque y daño
             }
             break;
-
-           /// TURNO RIVAL:
+        /// TURNO RIVAL:
         case 0:
-            cout << "Turno Rival\n";
+            cout << "····Turno Rival····\n";
             Sleep(500);
             ataquesRival(vidaJugador); /// Ataque de rival y daño
             break;
         }
-        /// CONTROLAMOS VIDA
+        /// CONTROLAMOS VIDA Y SI DA TRUE, CONTROLAMOS QUIEN GANA Y SI CONTINUAN LOS COMBATES
         if ( controlVida( vidaJugador, vidaRival ) ) {
-            if(vidaJugador <= 0) cout << "Pokemon de Jugador debilitado!!\n";
-            if(vidaRival <= 0) cout << "Pokemon de Rival debilitado!!\n";
+            if(vidaJugador <= 0) {
+                cout << "Pokemon de Jugador debilitado!!\n";
+                cout << "GANADOR: Rival!\n";
+
+            }
+            if(vidaRival <= 0) {
+                cout << "Pokemon de Rival debilitado!!\n";
+                cout << "GANADOR: Jugador!\n";
+            }
             Sleep(500);
-            cout << "Batalla terminada.\n";
-            quit = 0;
+            /// PREGUNTAMOS SI QUEREMOS CONTINUAR LA BATALLA UNA VEZ QUE UN JUGADOR PIERDE
+            siguienteBatalla(vidaJugador, vidaRival, quit);
+            /// MEDIANTE EL METODO siguienteBatalla(), tambien nos permite elegir otro pokemon (solo como ejemplo x ahora)
         }
         system("pause");
         _loop ++;
-
     }
     // fin de loop
 
@@ -94,12 +100,16 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
     cout << "########################\n\n";
     cout << "  RESULTADO: \n";
     cout << "  Jugador 1\n";
-    cout << "  Nombre: " << pok1.getNombre() << endl;
-    cout << "  Vida Final: "; if(vidaJugador < 0) cout << "0\n"; else cout << vidaJugador << endl;
+    cout << "  Nombre: " << _pkJugador->getNombre() << endl;
+    cout << "  Vida Final: ";
+    if(vidaJugador < 0) cout << "0\n";
+    else cout << vidaJugador << endl;
     cout << endl;
     cout << "  Enemigo\n";
-    cout << "  Nombre: " << pok2.getNombre() << endl;
-    cout << "  Vida final: "; if(vidaRival < 0) cout << "0\n"; else cout << vidaRival << endl;
+    cout << "  Nombre: " << _pkRival->getNombre() << endl;
+    cout << "  Vida final: ";
+    if(vidaRival < 0) cout << "0\n";
+    else cout << vidaRival << endl;
     cout << endl;
     cuadro(1, 25, 1, 13);
     cout << endl;
@@ -118,6 +128,74 @@ bool GameLoop::controlVida(int p_vidaJugador, int p_vidaRival)
     } else {
         return false;
     }
+}
+
+/// CONTROL DE SIGUIR LA BATALLA
+void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
+{
+    do {
+        cout << endl;
+        cout << "Batalla terminada.\n";
+        cout << "Que desea hacer??\n";
+        cout << "1- Continuar Batalla\n";
+        cout << "2- Salir de Batalla\n";
+        setInput();
+        switch(getInput()) {
+        case 1:
+            /// ·····································
+            /// Funcion o Metodo de eleccion de otro pokemon al que se puede acceder iria aca¿?
+            /// Ej: redefinir con otro pokemon a eleccion los punteros _pkJugador y _pkRival
+            /*
+            Ejemplo de forma de eleccioon de otro pokemon tiene usando un vector para la elecion.
+            */
+            /// Ejemplo:
+            system("cls");
+            int opc;
+            cout << "Siguente Batalla!\n";
+            cout << "Elige un pokemon:\n";
+            /// Aca puede ir una lista mostrada con una funcion o metodo
+            cout << "1- Bulbasuar\n";
+            cout << "2- Charmander\n";
+            cout << "3- Squirtle\n";
+            cout << "4- Pikachu\n";
+            cout << ">>";
+            cin >> opc;
+            switch (opc)
+            {
+            case 1:
+                cout << "Bulbasaur Elegido!\n";
+                _pkJugador = &pokedex[0];
+                break;
+            case 2:
+                cout << "Charmander Elegido!\n";
+                _pkJugador = &pokedex[1];
+                break;
+            case 3:
+                cout << "Squirtle Elegido!\n";
+                _pkJugador = &pokedex[2];
+                break;
+            case 4:
+                cout << "Pikachu Elegido!\n";
+                _pkJugador = &pokedex[3];
+                break;
+            }
+            /// ·····································
+            vidaJugador = _pkJugador->getVida();
+            vidaRival = _pkRival->getVida();
+            _loop = -1;
+            break;
+        case 2:
+            quit = 0;
+            cout << "Fin de batalla\n";
+            break;
+        default:
+            cout << "Opcion Incorrecta\n";
+            system("pause");
+            system("cls");
+            break;
+        }
+
+    } while(getInput() != 1 && getInput() != 2);
 }
 
 /// CONTROL DE TURNO
@@ -233,6 +311,10 @@ void GameLoop::setInput()
 int GameLoop::getGanador()
 {
     return _ganador;
+}
+int GameLoop::getInput()
+{
+    return _input;
 }
 //}
 

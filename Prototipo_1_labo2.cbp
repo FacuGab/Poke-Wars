@@ -33,6 +33,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Utiles.h" />
 		<Unit filename="include/Funciones.h" />
 		<Unit filename="include/GameLoop.h" />
 		<Unit filename="include/Pokemon_class.h" />
