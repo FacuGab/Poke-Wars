@@ -34,15 +34,17 @@ public:
     {
         _especial = false; // sin uso por ahora
         strcpy(_nombre, "nada");
+        strcpy(_descripcion, "nada");
         _potencia = 0;
         _PP = 0; // sin uso por ahora
         _tipo = 6; // sin uso por ahora
         _pres = 0; // sin uso por ahora
     }
-    Ataque(bool flg, const char * nom, int potencia, int PP, int tipo, int pres)
+    Ataque(bool flg, const char * nom, int potencia, int PP, int tipo, int pres, const char * desc = "nada")
     {
         _especial = flg;
         strcpy(_nombre, nom);
+        strcpy(_descripcion, desc);
         _potencia = potencia;
         _PP = PP;
         _tipo = tipo;
@@ -68,6 +70,7 @@ public:
 private:
     bool _especial;   /// si es especial
     char _nombre[25]; /// Nombre
+    char _descripcion[100];/// Descripcion del ataque
     int _PP;          /// Cantidad de veces que se puede usar en una batalla
     int _potencia;    /// Potencia del ataque
     int _tipo;        /// Tipo

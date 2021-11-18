@@ -35,6 +35,7 @@
 		</Compiler>
 		<Unit filename="include/Funciones.h" />
 		<Unit filename="include/GameLoop.h" />
+		<Unit filename="include/Jugador.h" />
 		<Unit filename="include/Pokemon_class.h" />
 		<Unit filename="include/Stats_Ataques_class.h" />
 		<Unit filename="include/Utiles.h" />

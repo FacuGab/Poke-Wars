@@ -10,7 +10,6 @@ using namespace std;
 
 // sin uso por ahora _Estado[]
 const string _Estado[7] = {"Paralisis",///-	Parálisis (causado por un ataque de tipo Eléctrico)
-
                             "Quemado",   ///-	Quemado (causado por un ataque de tipo Fuego)
                             "Envenenado",///-	Envenenado (causado por un ataque de tipo Bicho)
                             "Confundido",///-	Confundido (causado por un ataque de tipo Tierra)
@@ -45,7 +44,6 @@ void Pokemon::Mostrar(int ps)
     cout << "ATAQUE 2:" << _ataques[1].getNombre() << endl;
     cout << "ATAQUE 3:" << _ataques[2].getNombre() << endl;
     cout << "ATAQUE 4:" << _ataques[3].getNombre() << endl;
-
 }
 //}
 

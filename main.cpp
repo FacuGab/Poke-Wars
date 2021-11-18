@@ -44,14 +44,17 @@ int main()
     GameLoop Main;
 
     // INICIO //
+    ///Intro:
+    intro();
     int opc;
     do
     {
+        cout << endl;
         ///Menu de inicio:
         system("cls");
         cout << endl;
         gotoxy(5, 2);
-        cout << " ***JUEGO POKEMAIL***\n";
+        cout << "*** JUEGO POKE-WARS ***\n";
         cout << "  Ingrese Opcion: \n";
         cout << "   1- Pelea\n";
         cout << "   2- Cargar\n";
@@ -92,8 +95,8 @@ int main()
         system("pause");
 
     }while(opc != 0);
+
     // ----- //
-    cout << endl;
     return 0;
 }
 
