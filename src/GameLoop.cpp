@@ -4,10 +4,9 @@
 #include <stdlib.h>
 #include <windows.h>
 using namespace std;
+#include "Jugador.h"
 #include "GameLoop.h"
 #include "Funciones.h"
-#include "Utiles.h"
-
 
 //{ Constructor y Destructor (sin usos por ahora):
 GameLoop::GameLoop()
@@ -24,15 +23,16 @@ GameLoop::~GameLoop()
 //{ Metodos:
 
 /// LOOP DE BATALLA
-void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
+void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
 {
     ///Variables Locales
     srand (time(NULL));
-    _pkJugador = &pok1;
-    _pkRival = &pok2;
-    ///bool golpeo = false;
+    _pkJugador = &jugador.getPokemon(0);
+    _pkRival = &jugador.getRival(5);
+    jugador.setNombrePokemon(_pkJugador->getNombre());
     int vidaJugador = _pkJugador->getVida();
     int vidaRival = _pkRival->getVida();
+    int vidaRivalInicial = vidaRival;
     int quit = 1;
 
     // Loop:
@@ -55,6 +55,7 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
 
         /// ASIGNAMOS TURNO:
         switch( asignarTurno() ) {
+
         /// TURNO JUGADOR:
         case 1:
             cout << "····Turno Jugador····\n";
@@ -77,7 +78,6 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
             if(vidaJugador <= 0) {
                 cout << "Pokemon de Jugador debilitado!!\n";
                 cout << "GANADOR: Rival!\n";
-
             }
             if(vidaRival <= 0) {
                 cout << "Pokemon de Rival debilitado!!\n";
@@ -85,7 +85,7 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
             }
             Sleep(500);
             /// PREGUNTAMOS SI QUEREMOS CONTINUAR LA BATALLA UNA VEZ QUE UN JUGADOR PIERDE
-            siguienteBatalla(vidaJugador, vidaRival, quit);
+            siguienteBatalla(vidaJugador, vidaRival, quit, jugador, vidaRivalInicial);
             /// MEDIANTE EL METODO siguienteBatalla(), tambien nos permite elegir otro pokemon (solo como ejemplo x ahora)
         }
         system("pause");
@@ -129,7 +129,7 @@ bool GameLoop::controlVida(int p_vidaJugador, int p_vidaRival)
 }
 
 /// CONTROL DE SIGUIR LA BATALLA
-void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
+void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jugador &jugador, int vidaRivalInicio)
 {
     do {
         cout << endl;
@@ -142,51 +142,60 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
         {
         case 1:
             /// ·····································
-            /// Funcion o Metodo de eleccion de otro pokemon al que se puede acceder iria aca¿?
-            /// Ej: redefinir con otro pokemon a eleccion los punteros _pkJugador y _pkRival
-            ///Ejemplo de forma de eleccioon de otro pokemon tiene usando un vector para la elecion o un grupo de pokemon elegidos por el jugador:
+            /// Elegimos otro pokemon para continuar la batalla de los que tenemos
             system("cls");
             int opc;
             cout << "Siguente Batalla!\n";
             cout << "Elige un pokemon:\n";
-            /// Aca puede ir una lista mostrada con una funcion o metodo
-            /// ejemplo:
-            listaPokemon();
+            for(int i = 0; i < 4; i++) cout<< i+1 <<" - "<< jugador.getPokemon(i).getNombre()<<endl;
+            cout << "Ingresa una opcion del 1 al 4 para elegir\n";
             cout << ">>";
-            cin >> opc;
+            cin >> opc; // cuidado, no contempla que eligas un pokemon fuera del vector o vacio
             switch (opc)
             {
             case 1:
-                cout << "Bulbasaur Elegido!\n";
-                _pkJugador = &pokedex[0];
+                _pkJugador = &jugador.getPokemon(opc-1);
+                cout << _pkJugador->getNombre() << " elegido !!\n";
                 break;
             case 2:
-                cout << "Charmander Elegido!\n";
-                _pkJugador = &pokedex[1];
+                _pkJugador = &jugador.getPokemon(opc-1);
+                cout << _pkJugador->getNombre() << " elegido !!\n";
                 break;
             case 3:
-                cout << "Squirtle Elegido!\n";
-                _pkJugador = &pokedex[2];
+                _pkJugador = &jugador.getPokemon(opc-1);
+                cout << _pkJugador->getNombre() << " elegido !!\n";
                 break;
             case 4:
-                cout << "Pikachu Elegido!\n";
-                _pkJugador = &pokedex[3];
+                _pkJugador = &jugador.getPokemon(opc-1);
+                cout << _pkJugador->getNombre() << " elegido !!\n";
                 break;
             }
             /// ·····································
+            /// Cargamos la vida del pokemon jugador para la siguiente lucha
             vidaJugador = _pkJugador->getVida();
+            /// Seleccionamos un nuevo rival para la lucha
+            _pkRival = &jugador.getRival(rand() % 6 + 1);
             vidaRival = _pkRival->getVida();
             _loop = -1;
             break;
-        case 2:
+
+        case 2:{
+            int puntajeFinal = calcularPuntaje(vidaRivalInicio, vidaRival, jugador.getPuntaje());
+            if(guardarPartidaFinalizada(jugador.getNombreJugador(), jugador.getNombrePokemon(), puntajeFinal)){
+                cout << "Partida Guardada Exitosamente\n";
+            } else {
+                cout << "Error al guardar la partida\n";
+            }
             quit = 0;
             cout << "Fin de batalla\n";
             break;
-        default:
+            }
+        default:{
             cout << "Opcion Incorrecta\n";
             system("pause");
             system("cls");
             break;
+            }
         }
 
     } while(getInput() != 1 && getInput() != 2);
@@ -292,6 +301,40 @@ void GameLoop::ataquesRival(int &vidaPokJugador)
     }
 }
 
+/// CALCULAR PUNTAJE:
+int GameLoop::calcularPuntaje(int vidaRivalSano, int vidaRival, int puntos)
+{
+    cout<< "***************"<<endl;
+    cout<< "vida del Rival Inicial: "<< vidaRivalSano <<endl;
+    cout<< "vida del Rival Restante: "<< vidaRival <<endl;
+    cout<< "***************"<<endl;
+
+    if(vidaRival <= 0)
+    {
+        puntos = vidaRivalSano;
+    }
+    else
+    {
+        puntos = vidaRivalSano - vidaRival;
+    }   ///arreglar la vida extra <0
+    cout<< "*************************************"<<endl;
+    cout << "Puntaje obtenido en esta batalla: " << puntos <<endl;
+    cout<< "*************************************"<<endl;
+    return puntos;
+}
+
+/// GUARDAR PARTIDA:
+bool GameLoop::guardarPartidaFinalizada(const char* nJug, const char *nPk, int puntos)
+{
+    Jugador aux(nJug, nPk, puntos);
+    /*
+    aux.setNombreJugador(nJug);
+    aux.setNombrePokemon(nPk);
+    aux.setPuntaje(puntos);
+    */
+    return aux.guardarPartida();
+}
+
 //}
 
 //{ Gest y Sets
@@ -301,14 +344,16 @@ void GameLoop::setInput()
     cout << ">>";
     cin >> _input;
 }
-/// Get Ganador
-int GameLoop::getGanador()
-{
-    return _ganador;
-}
+/// Get Input:
 int GameLoop::getInput()
 {
     return _input;
 }
+/// Get Ganador:
+int GameLoop::getGanador()
+{
+    return _ganador;
+}
+
 //}
 

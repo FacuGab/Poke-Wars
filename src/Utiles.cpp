@@ -1,5 +1,10 @@
-#ifndef UTILES_H_INCLUDED
-#define UTILES_H_INCLUDED
+//Nombre:
+//TP N: 2
+//Ejercicio N:
+//Comentarios:
+
+#include <iostream>
+using namespace std;
 #include "Pokemon_class.h"
 
 /// Lista de Ataques:
@@ -23,29 +28,16 @@ Ataque squirtleAtaques[4] = {Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe f
                              Ataque(false, "Refugio", 50, 25, NORMAL, 95, "Aumenta la defensa"),
                              Ataque(false, "Pistola de Agua", 50, 25, AGUA, 95, "Golpe con agua")};
 
-Ataque charizardAtaques[4] = {Ataque(false, "Tacle", 50, 25, NORMAL, 95),
-                              Ataque(false, "Rasguño", 90, 10, FUEGO, 80),
-                              Ataque(false, "Vuelo", 90, 10, NORMAL, 80),
-                              Ataque(true, "Lanzallamas", 90, 10, FUEGO, 80)};
-
-Ataque blastoiseAtaques[4] = {Ataque(false, "Cabezaso", 75, 20, NORMAL, 90),
-                              Ataque(true, "Refugio", 60, 15, AGUA, 95),
-                              Ataque(true, "Pistola de Agua", 78, 20, AGUA, 85),
-                              Ataque(true, "Hidrobomba", 92, 10, AGUA, 75)};
 /// Lista de Pokemons:
-Pokemon pokedex[6] = {Pokemon("Bulbasaur", 1, PLANTA, 55, 60, bulbasaurAtaques),
+Pokemon pokedex[4] = {Pokemon("Bulbasaur", 1, PLANTA, 55, 60, bulbasaurAtaques),
                       Pokemon("Charmander", 2, FUEGO, 55, 62, charmanderAtaques),
                       Pokemon("Squirtle", 3, AGUA, 55, 64, squirtleAtaques),
-                      Pokemon("Pikachu", 25, ELECTRICO, 50, 70, pikachudAtaques),
-                      Pokemon("Charizard", 6, FUEGO, 78, 85, charizardAtaques),
-                      Pokemon("Blastoise", 9, AGUA, 80, 100, blastoiseAtaques)};
+                      Pokemon("Pikachu", 25, ELECTRICO, 50, 70, pikachudAtaques)};
 
-void listaPokemon()
+void listPokemon()
 {
     for(int i = 0; i < 4; i++)
     {
         cout << i+1 <<" "<< pokedex[i].getNombre() << endl;
     }
 }
-
-#endif // UTILES_H_INCLUDED

@@ -4,6 +4,7 @@
 #include <conio.h>
 using namespace std;
 #include "Funciones.h"
+#include "Jugador.h"
 
 
 void gotoxy(short px, short py){
@@ -187,4 +188,18 @@ void intro()
         }
         Sleep(t);
     }*/
+}
+
+void mostrarPartidasGuardadas()
+{
+    cout << "     --##################--"<<endl;
+    cout << "       PARTIDAS GUARDADAS"<<endl;
+    cout << "     --##################--"<<"\n\n";
+    cout << " Nombre"<<"   "<<" Nombre  "<<"   "<<"Puntaje"<<endl;
+    cout << " Jugador"<<"  "<<" Pokemon "<<"   "<<"obtenido  ""\n"<<endl;
+    Jugador partida;
+    int pos = 0;
+    while(partida.cargarPartida(pos++)) {
+            partida.mostrar();
+    }
 }

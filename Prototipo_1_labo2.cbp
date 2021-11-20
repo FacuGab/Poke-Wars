@@ -42,6 +42,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Funciones.cpp" />
 		<Unit filename="src/GameLoop.cpp" />
+		<Unit filename="src/Jugador.cpp" />
 		<Unit filename="src/Pokemon_class.cpp" />
 		<Extensions />
 	</Project>

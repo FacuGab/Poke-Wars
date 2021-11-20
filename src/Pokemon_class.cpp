@@ -18,6 +18,15 @@ const string _Estado[7] = {"Paralisis",///-	Parálisis (causado por un ataque de 
                             "Normal"};   ///-   Sin Efectos
 
 //{ CONSTRUCTOR Y METODOS:
+Pokemon::Pokemon()
+{
+    strcpy(_nombre, "Nada");
+    _ID = 0;
+    _tipo = 6;
+    _vida = 0;
+    _resistencia = 0;
+    _estado = "Nada"; // sin uso por ahora
+}
 Pokemon::Pokemon(const char * nom, int ID, int tipo, int vida, int res, Ataque * atq)
 {
     strcpy(_nombre, nom);

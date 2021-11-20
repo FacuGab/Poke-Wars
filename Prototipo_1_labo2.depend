@@ -61,49 +61,50 @@
 
 1637112722 c:\users\facu\desktop\utn tup\laboratorio 2\tp_labo2\prototipo_1\prototipo_1_labo2\include\utiles.h
 
-1637181557 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\main.cpp
+1637378177 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\main.cpp
 	<iostream>
 	<clocale>
 	<cstring>
 	<stdio.h>
-	"Pokemon_class.h"
-	"Stats_Ataques_class.h"
 	"GameLoop.h"
 	"Funciones.h"
 	"Jugador.h"
 
-1637097974 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\pokemon_class.h
+1637375105 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\pokemon_class.h
 	"Stats_Ataques_class.h"
 
 1637158355 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\stats_ataques_class.h
 	<cstring>
 
-1637097974 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\gameloop.h
+1637376259 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\gameloop.h
 	"Pokemon_class.h"
+	"Jugador.h"
 
-1637157338 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\funciones.h
+1637376638 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\funciones.h
 
 1637097974 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\jugador.h
 	<cstring>
 
-1637181346 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\funciones.cpp
+1637377414 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\funciones.cpp
 	<iostream>
 	<windows.h>
 	<conio.h>
 	"Funciones.h"
+	"Jugador.h"
 
-1637161752 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\gameloop.cpp
+1637376510 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\gameloop.cpp
 	<iostream>
 	<time.h>
 	<stdlib.h>
 	<windows.h>
+	"Jugador.h"
 	"GameLoop.h"
 	"Funciones.h"
-	"Utiles.h"
 
-1637161120 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\utiles.h
+1637360019 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\utiles.h
+	"Pokemon_class.h"
 
-1637160609 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\pokemon_class.cpp
+1637349985 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\pokemon_class.cpp
 	<iostream>
 	<cstring>
 	<stdio.h>
@@ -111,6 +112,21 @@
 	"Pokemon_class.h"
 	"Stats_Ataques_class.h"
 
-1637116325 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\jugador.h
+1637374873 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\include\jugador.h
 	<cstring>
+	"Pokemon_class.h"
+
+1637378077 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\jugador.cpp
+	<iostream>
+	"Pokemon_class.h"
+	"Jugador.h"
+	"Utiles.h"
+
+1637347063 source:e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\utiles.cpp
+	<iostream>
+	"Pokemon_class.h"
+
+1637347063 e:\documentos de facundo\programacion\c++\tp2_auxiliar\poke-wars-main1.3\src\utiles.cpp
+	<iostream>
+	"Pokemon_class.h"
 
