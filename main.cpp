@@ -36,7 +36,7 @@ int main()
     GameLoop Main;
 
     /// Intro:
-    //intro();
+    intro();
 
     // INICIO //
     do {
