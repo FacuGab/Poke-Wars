@@ -4,10 +4,9 @@
 #include <stdlib.h>
 #include <windows.h>
 using namespace std;
+#include "Jugador.h"
 #include "GameLoop.h"
 #include "Funciones.h"
-#include "Utiles.h"
-
 
 //{ Constructor y Destructor (sin usos por ahora):
 GameLoop::GameLoop()
@@ -24,18 +23,23 @@ GameLoop::~GameLoop()
 //{ Metodos:
 
 /// LOOP DE BATALLA
-void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
+void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
 {
     ///Variables Locales
     srand (time(NULL));
-    _pkJugador = &pok1;
-    _pkRival = &pok2;
-    ///_vidaPkJugador = _pkJugador->getVida(); // reemplazar a vidaJugador ¿?
-    ///_vidaPkRival = _pkRival->getVida(); // reemplazar a vidaRival ¿?
-    bool golpeo = false;
+    for(int i = 0; i < 4; i++) {jugador.setEstado(i, true);} /// Ponemos todos los pokemons disponibles al inicio de un loop de batalla
+    _pkJugador = &jugador.getPokemon(0);
+    _pkRival = &jugador.getRival(0);
+    _ganador = -1;
+    _loop = 0;
+    jugador.setNombrePokemon(_pkJugador->getNombre());
     int vidaJugador = _pkJugador->getVida();
     int vidaRival = _pkRival->getVida();
+    int vidaRivalInicial = vidaRival;
     int quit = 1;
+    int posPoke = 0;
+
+    /*Aca podria ir un metodo de pre-batalla, el cual muetra quienes van a pelar, alguna que otra estadisitca y comenta algunas reglas del juego ¿?*/
 
     // Loop:
     while(quit != 0) {
@@ -57,6 +61,7 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
 
         /// ASIGNAMOS TURNO:
         switch( asignarTurno() ) {
+
         /// TURNO JUGADOR:
         case 1:
             cout << "····Turno Jugador····\n";
@@ -66,9 +71,11 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
             } else if (_input == 1) {
                 ataquesJugador(vidaRival); /// Seleccion de Ataque y daño
             }
+
             break;
         /// TURNO RIVAL:
         case 0:
+            cout << endl;
             cout << "····Turno Rival····\n";
             Sleep(500);
             ataquesRival(vidaJugador); /// Ataque de rival y daño
@@ -76,10 +83,11 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
         }
         /// CONTROLAMOS VIDA Y SI DA TRUE, CONTROLAMOS QUIEN GANA Y SI CONTINUAN LOS COMBATES
         if ( controlVida( vidaJugador, vidaRival ) ) {
+            cout << "=========================\n";
             if(vidaJugador <= 0) {
+                jugador.setEstado(posPoke, false);
                 cout << "Pokemon de Jugador debilitado!!\n";
                 cout << "GANADOR: Rival!\n";
-
             }
             if(vidaRival <= 0) {
                 cout << "Pokemon de Rival debilitado!!\n";
@@ -87,8 +95,8 @@ void GameLoop::gamePlay(Pokemon &pok1, Pokemon &pok2) // GamePlay de batalla
             }
             Sleep(500);
             /// PREGUNTAMOS SI QUEREMOS CONTINUAR LA BATALLA UNA VEZ QUE UN JUGADOR PIERDE
-            siguienteBatalla(vidaJugador, vidaRival, quit);
-            /// MEDIANTE EL METODO siguienteBatalla(), tambien nos permite elegir otro pokemon (solo como ejemplo x ahora)
+             /// MEDIANTE EL METODO siguienteBatalla(), podemos elegir otro pokemon si quremos continuar la batallas
+            siguienteBatalla(vidaJugador, vidaRival, quit, jugador, vidaRivalInicial, posPoke);
         }
         system("pause");
         _loop ++;
@@ -131,8 +139,9 @@ bool GameLoop::controlVida(int p_vidaJugador, int p_vidaRival)
 }
 
 /// CONTROL DE SIGUIR LA BATALLA
-void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
+void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jugador &jugador, int vidaRivalInicio, int &pos)
 {
+    bool flag = true;
     do {
         cout << endl;
         cout << "Batalla terminada.\n";
@@ -140,62 +149,65 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit)
         cout << "1- Continuar Batalla\n";
         cout << "2- Salir de Batalla\n";
         setInput();
-        switch(getInput()) {
-        case 1:
+        switch(getInput())
+        {
+        case 1:{
             /// ·····································
-            /// Funcion o Metodo de eleccion de otro pokemon al que se puede acceder iria aca¿?
-            /// Ej: redefinir con otro pokemon a eleccion los punteros _pkJugador y _pkRival
-            /*
-            Ejemplo de forma de eleccioon de otro pokemon tiene usando un vector para la elecion.
-            */
-            /// Ejemplo:
+            /// Elegimos otro pokemon para continuar la batalla de los que tenemos
             system("cls");
             int opc;
             cout << "Siguente Batalla!\n";
             cout << "Elige un pokemon:\n";
-            /// Aca puede ir una lista mostrada con una funcion o metodo
-            cout << "1- Bulbasuar\n";
-            cout << "2- Charmander\n";
-            cout << "3- Squirtle\n";
-            cout << "4- Pikachu\n";
+            for(int i = 0; i < 4; i++) {cout<< i+1 <<" - "<< jugador.getPokemon(i).getNombre()<<endl;}
+            cout << "Ingresa una opcion del 1 al 4 para elegir\n";
             cout << ">>";
             cin >> opc;
-            switch (opc)
-            {
-            case 1:
-                cout << "Bulbasaur Elegido!\n";
-                _pkJugador = &pokedex[0];
-                break;
-            case 2:
-                cout << "Charmander Elegido!\n";
-                _pkJugador = &pokedex[1];
-                break;
-            case 3:
-                cout << "Squirtle Elegido!\n";
-                _pkJugador = &pokedex[2];
-                break;
-            case 4:
-                cout << "Pikachu Elegido!\n";
-                _pkJugador = &pokedex[3];
-                break;
+            /// seleccionar otro pokemon que no este debil
+            if(opc > 0 && opc < 5){
+                if(jugador.getEstado(opc-1) == false){
+                    cout << "Pokemon Debilitado, elige otro\n";
+                    system("pause");
+                } else {
+                    _pkJugador = &jugador.getPokemon(opc-1);
+                    pos = opc - 1;
+                    cout << _pkJugador->getNombre() << " elegido !!\n";
+                    /// Cargamos la vida del pokemon jugador para la siguiente lucha
+                    vidaJugador = _pkJugador->getVida();
+                    /// Seleccionamos un nuevo rival para la lucha
+                    _pkRival = &jugador.getRival(rand() % 5 + 1);
+                    vidaRival = _pkRival->getVida();
+                    _loop = -1;
+                    flag = false;
+                }
+            } else {
+                cout << "Opcion Incorrecta\n";
+                system("pause");
+                system("cls");
             }
-            /// ·····································
-            vidaJugador = _pkJugador->getVida();
-            vidaRival = _pkRival->getVida();
-            _loop = -1;
             break;
-        case 2:
+        }
+        case 2:{
+            system("cls");
+            int puntajeFinal = calcularPuntaje(vidaRivalInicio, vidaRival, jugador.getPuntaje());
+            if(guardarPartidaFinalizada(jugador.getNombreJugador(), jugador.getNombrePokemon(), puntajeFinal)){
+                    cout << "Partida Guardada Exitosamente\n";
+                } else {
+                    cout << "Error al guardar la partida\n";
+                }
             quit = 0;
             cout << "Fin de batalla\n";
+            flag = false;
             break;
-        default:
+            }
+        default:{
             cout << "Opcion Incorrecta\n";
             system("pause");
             system("cls");
             break;
+            }
         }
 
-    } while(getInput() != 1 && getInput() != 2);
+    } while(flag);
 }
 
 /// CONTROL DE TURNO
@@ -209,28 +221,57 @@ int GameLoop::asignarTurno()
 }
 
 /// CALCULAR DAÑO
-int GameLoop::calcularDanio(int danio, int defensa)
+int GameLoop::calcularDanio(int danio, int defensa, int pres)
 {
-
     int calculo;
+    int calculoFinal;
     float aleatorio = (rand() % 100 + 1);
-    aleatorio = aleatorio/100;
-    cout << "Coeficiente aleatorio: " << aleatorio << endl;
-    ///cout << aleatorio << endl;
-    calculo = (danio /*-(aleatorio*10))*/ - (defensa * aleatorio));
-    cout << "calculo de defnesa: "<< (defensa*aleatorio) << endl;
-    cout << "calculo de potencia: "<< (danio -(aleatorio*10)) << endl;
-    cout << "pre-daño: " << calculo << endl;
-    if( calculo > 10 ) {
-        return calculo;
+    cout << endl;
+    cout << " ######·CALCULANDO·######\n";
+    Sleep(1000);
+    int defAleatorea = (rand() % 20 + 1);
+    cout << "Aleatorio: " << aleatorio << endl;
+    if( pres > aleatorio ) {
+        aleatorio = aleatorio/100;
+        calculo = (danio - ((defensa * aleatorio) + defAleatorea));
+        cout << "Potencia: " << danio << endl;
+        cout << "Defensa: " << defensa << endl;
+        cout << "Coeficiente aleatorio: " << aleatorio << endl;
+        cout << "calculo de defnesa: " << (defensa * aleatorio) + defAleatorea << endl;
+        cout << "pre-daño: " << calculo << endl;
+        calculoFinal = tipoDanio(calculo);
+        cout << "daño final: " << calculoFinal << endl;
+        if( calculoFinal > 0 ) {
+            return calculoFinal;
+        } else {
+            return 0;
+        }
     } else {
         return 0;
     }
 }
 
+/// TIPO DAÑO
+int GameLoop::tipoDanio(int preDanio)
+{
+    /*
+    FUEGO     = 0, fuerte contra planta
+    AGUA      = 1, fuerte contra fuego
+    PLANTA    = 2, fuerte contra agua
+    ELECTRICO = 3, fuerte contra agua
+    BICHO     = 4, fuerte contra planta
+    TIERRA    = 5, fuerte contra electrico
+    NORMAL    = 6  fuerte contra tierra
+    */
+    // FALTA HACER, por ahora no hace ningun cambio
+    return preDanio;
+}
+
 /// MOSTRAR Y ELEGIR ATAQUES JUGADOR
 void GameLoop::ataquesJugador(int &vidaPokRival)
 {
+    _damage = 0;
+    int pp;
     cout << "Ataques de " << _pkJugador->getNombre() << endl;
     cout << "1- "<< _pkJugador->getAtaques()[0].getNombre() << endl;
     cout << "2- "<< _pkJugador->getAtaques()[1].getNombre() << endl;
@@ -239,20 +280,63 @@ void GameLoop::ataquesJugador(int &vidaPokRival)
     setInput();
     switch(_input) {
     case 1:
-        cout <<_pkJugador->getAtaques()[0].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[0].getPotencia()<<endl;
-        _damage = calcularDanio( _pkJugador->getAtaques()[0].getPotencia(), _pkRival->getResistencia());
+        if(_pkJugador->getAtaques()[0].getPP() > 0) {
+            cout << _pkJugador->getAtaques()[0].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[0].getPotencia() <<endl;
+            cout << _pkJugador->getAtaques()[0].getNombre() <<", Puntos de Ataque: "<< _pkJugador->getAtaques()[0].getPP() <<endl;
+            cout << _pkJugador->getAtaques()[0].getNombre() <<", Precision: "<< _pkJugador->getAtaques()[0].getPrec() <<endl;
+            cout << _pkJugador->getAtaques()[0].getNombre() <<", Descripcion: "<< _pkJugador->getAtaques()[0].getDesc() <<endl;
+            _damage = calcularDanio( _pkJugador->getAtaques()[0].getPotencia(), _pkRival->getResistencia(), _pkJugador->getAtaques()[0].getPrec() );
+            pp = _pkJugador->getAtaques()[0].getPP();
+            pp--;
+            _pkJugador->getAtaques()[0].setPP(pp);
+        } else {
+            cout << "No quedan Puntos de Ataque para realizar el movimiento.\n";
+        }
         break;
+
     case 2:
-        cout <<_pkJugador->getAtaques()[1].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[1].getPotencia()<<endl;
-        _damage = calcularDanio( _pkJugador->getAtaques()[1].getPotencia(),  _pkRival->getResistencia());
+       if(_pkJugador->getAtaques()[1].getPP() > 0) {
+            cout << _pkJugador->getAtaques()[1].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[1].getPotencia() <<endl;
+            cout << _pkJugador->getAtaques()[1].getNombre() <<", Puntos de Ataque: "<< _pkJugador->getAtaques()[1].getPP() <<endl;
+            cout << _pkJugador->getAtaques()[1].getNombre() <<", Precision: "<< _pkJugador->getAtaques()[1].getPrec() <<endl;
+            cout << _pkJugador->getAtaques()[1].getNombre() <<", Descripcion: "<< _pkJugador->getAtaques()[1].getDesc() <<endl;
+            _damage = calcularDanio( _pkJugador->getAtaques()[1].getPotencia(), _pkRival->getResistencia(), _pkJugador->getAtaques()[1].getPrec() );
+            pp = _pkJugador->getAtaques()[1].getPP();
+            pp--;
+            _pkJugador->getAtaques()[1].setPP(pp);
+        } else {
+            cout << "No quedan Puntos de Ataque para realizar el movimiento.\n";
+        }
         break;
+
     case 3:
-        cout <<_pkJugador->getAtaques()[2].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[2].getPotencia()<<endl;
-        _damage = calcularDanio( _pkJugador->getAtaques()[2].getPotencia(),  _pkRival->getResistencia());
+        if(_pkJugador->getAtaques()[2].getPP() > 0) {
+            cout << _pkJugador->getAtaques()[2].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[2].getPotencia() <<endl;
+            cout << _pkJugador->getAtaques()[2].getNombre() <<", Puntos de Ataque: "<< _pkJugador->getAtaques()[2].getPP() <<endl;
+            cout << _pkJugador->getAtaques()[2].getNombre() <<", Precision: "<< _pkJugador->getAtaques()[2].getPrec() <<endl;
+            cout << _pkJugador->getAtaques()[2].getNombre() <<", Descripcion: "<< _pkJugador->getAtaques()[2].getDesc() <<endl;
+            _damage = calcularDanio( _pkJugador->getAtaques()[2].getPotencia(), _pkRival->getResistencia(), _pkJugador->getAtaques()[2].getPrec() );
+            pp = _pkJugador->getAtaques()[2].getPP();
+            pp--;
+            _pkJugador->getAtaques()[2].setPP(pp);
+        } else {
+            cout << "No quedan Puntos de Ataque para realizar el movimiento.\n";
+        }
         break;
+
     case 4:
-        cout <<_pkJugador->getAtaques()[3].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[3].getPotencia()<<endl;
-        _damage = calcularDanio( _pkJugador->getAtaques()[3].getPotencia(),  _pkRival->getResistencia());
+        if(_pkJugador->getAtaques()[3].getPP() > 0) {
+            cout << _pkJugador->getAtaques()[3].getNombre() <<", Potencia: "<< _pkJugador->getAtaques()[3].getPotencia() <<endl;
+            cout << _pkJugador->getAtaques()[3].getNombre() <<", Puntos de Ataque: "<< _pkJugador->getAtaques()[3].getPP() <<endl;
+            cout << _pkJugador->getAtaques()[3].getNombre() <<", Precision: "<< _pkJugador->getAtaques()[3].getPrec() <<endl;
+            cout << _pkJugador->getAtaques()[3].getNombre() <<", Descripcion: "<< _pkJugador->getAtaques()[3].getDesc() <<endl;
+            _damage = calcularDanio( _pkJugador->getAtaques()[3].getPotencia(), _pkRival->getResistencia(), _pkJugador->getAtaques()[3].getPrec() );
+            pp = _pkJugador->getAtaques()[3].getPP();
+            pp--;
+            _pkJugador->getAtaques()[3].setPP(pp);
+        } else {
+            cout << "No quedan Puntos de Ataque para realizar el movimiento.\n";
+        }
         break;
     }
 
@@ -261,7 +345,7 @@ void GameLoop::ataquesJugador(int &vidaPokRival)
         vidaPokRival -= _damage;
         cout << "Daño causado por Pokemon de Jugador: " << _damage << endl;
     } else {
-        cout << "No causo Daño el ataque de Pokemon Jugador.\n";
+        cout << "El ataque fallo. No causo Daño el ataque de Pokemon Jugador.\n";
     }
 }
 
@@ -272,19 +356,19 @@ void GameLoop::ataquesRival(int &vidaPokJugador)
     _input = aleatorio;
     switch(_input) {
     case 1:
-        _damage = calcularDanio( _pkRival->getAtaques()[0].getPotencia(), _pkJugador->getResistencia());
+        _damage = calcularDanio( _pkRival->getAtaques()[0].getPotencia(), _pkJugador->getResistencia(), _pkRival->getAtaques()[0].getPrec() );
         cout << "Ataque usado por Pokemon Rival: " << _pkRival->getAtaques()[0].getNombre() << endl;
         break;
     case 2:
-        _damage = calcularDanio( _pkRival->getAtaques()[1].getPotencia(),  _pkJugador->getResistencia());
+        _damage = calcularDanio( _pkRival->getAtaques()[1].getPotencia(),  _pkJugador->getResistencia(), _pkRival->getAtaques()[1].getPrec() );
         cout << "Ataque usado por Pokemon Rival: " << _pkRival->getAtaques()[1].getNombre() << endl;
         break;
     case 3:
-        _damage = calcularDanio( _pkRival->getAtaques()[2].getPotencia(),  _pkJugador->getResistencia());
+        _damage = calcularDanio( _pkRival->getAtaques()[2].getPotencia(),  _pkJugador->getResistencia(), _pkRival->getAtaques()[2].getPrec() );
         cout << "Ataque usado por Pokemon Rival: " << _pkRival->getAtaques()[2].getNombre() << endl;
         break;
     case 4:
-        _damage = calcularDanio( _pkRival->getAtaques()[3].getPotencia(),  _pkJugador->getResistencia());
+        _damage = calcularDanio( _pkRival->getAtaques()[3].getPotencia(),  _pkJugador->getResistencia(), _pkRival->getAtaques()[3].getPrec() );
         cout << "Ataque usado por Pokemon Rival: " << _pkRival->getAtaques()[3].getNombre() << endl;
         break;
     }
@@ -294,8 +378,35 @@ void GameLoop::ataquesRival(int &vidaPokJugador)
         vidaPokJugador -= _damage;
         cout << "Daño causado por Pokemon de Rival: " << _damage << endl;
     } else {
-        cout << "No causo Daño el ataque de Pokemon Rival.\n";
+        cout << "El ataque fallo. No causo Daño el ataque de Pokemon Rival.\n";
     }
+}
+
+/// CALCULAR PUNTAJE:
+int GameLoop::calcularPuntaje(int vidaRivalSano, int vidaRival, int puntos)
+{
+    cout<< "***************"<<endl;
+    cout<< "vida del Rival Inicial: "<< vidaRivalSano <<endl;
+    if(vidaRival >= 0) cout<< "vida del Rival Restante: "<< vidaRival <<endl;
+    else cout<< "vida del Rival Restante: 0"<<endl;
+    cout<< "***************"<<endl;
+
+    if( vidaRival <= 0 ) {
+        puntos = vidaRivalSano;
+    } else {
+        puntos = vidaRivalSano - vidaRival;
+    }
+    cout<< "*************************************"<<endl;
+    cout << "Puntaje obtenido en esta batalla: " << puntos <<endl;
+    cout<< "*************************************"<<endl;
+    return puntos;
+}
+
+/// GUARDAR PARTIDA:
+bool GameLoop::guardarPartidaFinalizada(const char* nJug, const char *nPk, int puntos)
+{
+    Jugador aux(nJug, nPk, puntos);
+    return aux.guardarPartida();
 }
 
 //}
@@ -307,14 +418,16 @@ void GameLoop::setInput()
     cout << ">>";
     cin >> _input;
 }
-/// Get Ganador
-int GameLoop::getGanador()
-{
-    return _ganador;
-}
+/// Get Input:
 int GameLoop::getInput()
 {
     return _input;
 }
+/// Get Ganador:
+int GameLoop::getGanador()
+{
+    return _ganador;
+}
+
 //}
 

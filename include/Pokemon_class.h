@@ -6,25 +6,26 @@
 class Pokemon
 {
     public:
-        /// CONSTRUCTOR:
+        /// CONSTRUCTORES:
+        Pokemon();
         Pokemon(const char* nom,
-                 int ID, // sin uso
-                 int tipo, // sin uso
-                 int vida,
-                 int res,
-                 Ataque* atq);
-        /// METODOS:
-        void Mostrar(int ps);
+                int ID, // sin uso
+                int tipo, // sin uso
+                int vida,
+                int res,
+                Ataque* atq);
 
+        /// METODOS:
+         void Mostrar(int ps);
         /// GETS:
         char* getNombre();
         char* getNombreJugador();
-        int getID(); // sin uso
-        int getTipo(); // sin uso
-        int getVida();
-        int getResistencia();
-        Ataque* getAtaques();
-        string getEstado(); // sin uso
+          int getID(); // sin uso
+          int getTipo(); // sin uso
+          int getVida();
+          int getResistencia();
+      Ataque* getAtaques();
+       string getEstado(); // sin uso
 
         /// SETS:
         void setNombre(const char* cad);
@@ -39,12 +40,12 @@ class Pokemon
     private:
         char _nombre[30];
         char _nombreJugador[35];
-        int _ID; // sin uso
-        int _tipo; // sin uso
-        int _vida;
-        int _resistencia;
-        Ataque* _ataques;
-        string _estado; // sin uso
+         int _ID; // sin uso
+         int _tipo; // sin uso
+         int _vida;
+         int _resistencia;
+     Ataque* _ataques;
+      string _estado; // sin uso
 };
 
 #endif // POKEMON_CLASS_H

@@ -10,7 +10,6 @@ using namespace std;
 
 // sin uso por ahora _Estado[]
 const string _Estado[7] = {"Paralisis",///-	Parálisis (causado por un ataque de tipo Eléctrico)
-
                             "Quemado",   ///-	Quemado (causado por un ataque de tipo Fuego)
                             "Envenenado",///-	Envenenado (causado por un ataque de tipo Bicho)
                             "Confundido",///-	Confundido (causado por un ataque de tipo Tierra)
@@ -19,6 +18,16 @@ const string _Estado[7] = {"Paralisis",///-	Parálisis (causado por un ataque de 
                             "Normal"};   ///-   Sin Efectos
 
 //{ CONSTRUCTOR Y METODOS:
+Pokemon::Pokemon()
+{
+    strcpy(_nombre, "Nada");
+    _ID = 0;
+    _tipo = 6;
+    _vida = 0;
+    _resistencia = 0;
+    _ataques = NULL;
+    _estado = "Nada"; // sin uso por ahora
+}
 Pokemon::Pokemon(const char * nom, int ID, int tipo, int vida, int res, Ataque * atq)
 {
     strcpy(_nombre, nom);
@@ -45,7 +54,6 @@ void Pokemon::Mostrar(int ps)
     cout << "ATAQUE 2:" << _ataques[1].getNombre() << endl;
     cout << "ATAQUE 3:" << _ataques[2].getNombre() << endl;
     cout << "ATAQUE 4:" << _ataques[3].getNombre() << endl;
-
 }
 //}
 
