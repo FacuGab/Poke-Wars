@@ -38,7 +38,7 @@ public:
         _potencia = 0;
         _PP = 0; // sin uso por ahora
         _tipo = 6; // sin uso por ahora
-        _pres = 0; // sin uso por ahora
+        _prec = 0; // sin uso por ahora
     }
     Ataque(bool flg, const char * nom, int potencia, int PP, int tipo, int pres, const char * desc = "nada")
     {
@@ -48,7 +48,7 @@ public:
         _potencia = potencia;
         _PP = PP;
         _tipo = tipo;
-        _pres = pres;
+        _prec = pres;
     }
 
     /// Gets:
@@ -57,7 +57,8 @@ public:
     int getPotencia() { return _potencia; }
     int getPP()       { return _PP; }
     int getTipo()     { return _tipo; }
-    int getPres()     { return _pres; }
+    int getPrec()     { return _prec; }
+    char* getDesc()     { return _descripcion; }
 
     /// Sets:
     void setEspecial(bool flg) { _especial = flg; }
@@ -65,7 +66,7 @@ public:
     void setPotencia(int num)  { _potencia = num; }
     void setPP(int num)        { _PP = num; }
     void setTipo(int num)      { _tipo = num; }
-    void setPres(int num)      { _pres = num; }
+    void setPrec(int num)      { _prec = num; }
 
 private:
     bool _especial;   /// si es especial
@@ -74,7 +75,7 @@ private:
     int _PP;          /// Cantidad de veces que se puede usar en una batalla
     int _potencia;    /// Potencia del ataque
     int _tipo;        /// Tipo
-    int _pres;        /// Precision del ataque
+    int _prec;        /// Precision del ataque
 };
 //
 

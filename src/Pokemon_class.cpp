@@ -25,6 +25,7 @@ Pokemon::Pokemon()
     _tipo = 6;
     _vida = 0;
     _resistencia = 0;
+    _ataques = NULL;
     _estado = "Nada"; // sin uso por ahora
 }
 Pokemon::Pokemon(const char * nom, int ID, int tipo, int vida, int res, Ataque * atq)

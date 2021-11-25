@@ -15,11 +15,12 @@ class GameLoop
         void ataquesJugador(int &vidaPokRival);
         void ataquesRival(int &vidaPokJugador);
          int asignarTurno();
-         int calcularDanio(int p_danio, int p_defensa);
+         int calcularDanio(int p_danio, int p_defensa, int pres);
         bool controlVida(int p_vidaJugador, int p_vidaRival);
-        void siguienteBatalla(int &, int &, int &, Jugador &, int);
+        void siguienteBatalla(int &, int &, int &, Jugador &, int, int &);
          int calcularPuntaje(int vidaRivalSano, int vidaRival,int puntos);
         bool guardarPartidaFinalizada(const char* nJug,const char *nPk,int puntos);
+         int tipoDanio(int);
 
         /// GETS y SETS
         void setInput(); /// pide por pantalla, no es un set normal

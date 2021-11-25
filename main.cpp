@@ -36,7 +36,7 @@ int main()
     GameLoop Main;
 
     /// Intro:
-    intro();
+    // intro();
 
     // INICIO //
     do {
@@ -70,8 +70,11 @@ int main()
                 break;
 
             case 2:
+                system("cls");
                 cout << "Puntajes:\n";
                 mostrarPartidasGuardadas();
+                /*player.cargarpartidaantigua()*/
+
                 break;
 
             case 3:
@@ -115,6 +118,8 @@ int main()
             } else if (Main.getGanador() == 2) {
                 cout << "Ganador Rival. Perdiste\n";
                 cout << "No sumaste Puntos de Batalla\n";
+            }else{
+                cout << "No hay ganador\n";
             }
             break;
         case 2:

@@ -199,7 +199,7 @@ void mostrarPartidasGuardadas()
     cout << " Jugador"<<"  "<<" Pokemon "<<"   "<<"obtenido  ""\n"<<endl;
     Jugador partida;
     int pos = 0;
-    while(partida.cargarPartida(pos++)) {
+    while(partida.cargarPartida(pos++) == true) {
             partida.mostrar();
     }
 }

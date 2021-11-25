@@ -95,6 +95,7 @@ void Jugador::eleccion()
             cout << "Elige de entre 4 pokemons\n";
             listaPokemon();
             cout << "-------------------------\n";
+            cout << ">>";
             cin >> opcion; // CUIDADO! no controla que opcion entra, se puede caer fuera del vector (-1 o 5 xejm)
 
             if(_itr < 4){
