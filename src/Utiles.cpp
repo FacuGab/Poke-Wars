@@ -9,9 +9,9 @@ using namespace std;
 
 /// Lista de Ataques:
 Ataque pikachudAtaques[4] = { Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe fisico"),                                   //pos 0
-                              Ataque(false, "Rasguño", 55, 10, NORMAL, 80, "Ataque con las garras"),                        //pos 1
+                              Ataque(false, "RasguÃ±o", 55, 10, NORMAL, 80, "Ataque con las garras"),                        //pos 1
                               Ataque(false, "Ataque Rapido", 45, 10, NORMAL, 99, "Ataque no puede fallar"),                 //pos 2
-                              Ataque(true, "Impacto Trueno", 90, 10, ELECTRICO, 80, "Impacto Electrico, puede paralizar")}; //pos 3
+                              Ataque(true, "Impacto Trueno", 90, 10, ELECTRICO, 70, "Impacto Electrico, puede paralizar")}; //pos 3
 
 Ataque bulbasaurAtaques[4] = {Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe fisico"),
                               Ataque(false, "Hojas Navajas", 50, 25, PLANTA, 95, "Ataque con hojas afiladas"),
@@ -19,7 +19,7 @@ Ataque bulbasaurAtaques[4] = {Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe 
                               Ataque(false, "Drenadoras", 50, 25, NORMAL, 95, "Drena la vida del Enemigo")};
 
 Ataque charmanderAtaques[4] = {Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe fisico"),
-                               Ataque(false, "Rasguño", 50, 25, NORMAL, 95, "Ataque con las garras"),
+                               Ataque(false, "RasguÃ±o", 50, 25, NORMAL, 95, "Ataque con las garras"),
                                Ataque(false, "Golpe Fuego", 50, 25, FUEGO, 95, "Golpea envuelto en llamas"),
                                Ataque(false, "Dia Soleado", 50, 25, FUEGO, 95, "Potencia los ataques de tipo fuego")};
 
