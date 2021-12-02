@@ -29,20 +29,18 @@ enum TIPO
 class Ataque
 {
 public:
-    /// Constructor:
+    /// Constructores:
     Ataque()
     {
-        _especial = false; // sin uso por ahora
         strcpy(_nombre, "nada");
         strcpy(_descripcion, "nada");
         _potencia = 0;
-        _PP = 0; // sin uso por ahora
-        _tipo = 6; // sin uso por ahora
-        _prec = 0; // sin uso por ahora
+        _PP = 0;
+        _tipo = 6;
+        _prec = 0;
     }
-    Ataque(bool flg, const char * nom, int potencia, int PP, int tipo, int pres, const char * desc = "nada")
+    Ataque(const char * nom, int potencia, int PP, int tipo, int pres, const char * desc = "nada")
     {
-        _especial = flg;
         strcpy(_nombre, nom);
         strcpy(_descripcion, desc);
         _potencia = potencia;
@@ -52,7 +50,6 @@ public:
     }
 
     /// Gets:
-    bool getEspecial(){ return _especial; }
     char* getNombre() { return _nombre;}
     int getPotencia() { return _potencia; }
     int getPP()       { return _PP; }
@@ -61,7 +58,6 @@ public:
     char* getDesc()     { return _descripcion; }
 
     /// Sets:
-    void setEspecial(bool flg) { _especial = flg; }
     void setNombre(const char * cad){ strcpy(_nombre, cad); }
     void setPotencia(int num)  { _potencia = num; }
     void setPP(int num)        { _PP = num; }
@@ -69,7 +65,6 @@ public:
     void setPrec(int num)      { _prec = num; }
 
 private:
-    bool _especial;   /// si es especial
     char _nombre[25]; /// Nombre
     char _descripcion[100];/// Descripcion del ataque
     int _PP;          /// Cantidad de veces que se puede usar en una batalla
@@ -79,42 +74,4 @@ private:
 };
 //
 
-/* SIN USO POR AHORA
-/ ---- STATS ---- //
-class Stats
-{
-public:
-    /// Constructor:
-    Stats(int p_atq, int p_atqEsp, int p_def, int p_defEsp, int p_vel)
-    {
-        _Atq  = p_atq;
-        _AtqEsp = p_atqEsp;
-        _Def = p_def;
-        _DefEsp = p_defEsp;
-        _Vel = p_vel;
-    }
-    /// Gets:
-    int Get_Atq()   { return _Atq; }
-    int Get_AtqEsp(){ return _AtqEsp; }
-    int Get_Def()   { return _Def; }
-    int Get_DefEsp(){ return _DefEsp; }
-    int Get_Vel()   { return _Vel; }
-
-    /// Sets:
-    void Set_Atq(int num)   { _Atq = num; }
-    void Set_AtqEsp(int num){ _AtqEsp = num; }
-    void Set_AtqDef(int num){ _Def = num; }
-    void Set_DefEsp(int num){ _DefEsp = num; }
-    void Set_Vel(int num)   { _Vel = num; }
-
-
-private:
-    int _Atq;    /// ataque principal
-    int _AtqEsp; /// ataque especial
-    int _Def;    /// defensa principal
-    int _DefEsp; /// defensa especial
-    int _Vel;    /// velocidad
-
-};
-/*/
 #endif // STATS_ATAQUES_CLASS_H_INCLUDED

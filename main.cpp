@@ -18,6 +18,7 @@ using namespace std;
 #include "GameLoop.h"
 #include "Funciones.h"
 #include "Jugador.h"
+#include "Lideres.h"
 
 
 /// MAIN:
@@ -35,8 +36,11 @@ int main()
     /// GamePlay
     GameLoop Main;
 
-    /// Intro:
-    // intro();
+    /// Lideres
+    Lideres uno;
+
+    /// Intro
+    intro();
 
     // INICIO //
     do {
@@ -46,11 +50,11 @@ int main()
             system("cls");
             gotoxy(2, 2);
             cout << " ***JUEGO POKEMAIL***\n";
-            cout << "  Ingrese Opcion: \n";
-            cout << "   1- Nueva Partida\n";
-            cout << "   2- Cargar\n";
-            cout << "   3- Creditos\n";
-            cout << "   0- Salir \n";
+            cout << "  INGRESE OPCION: \n";
+            cout << "   1- NUEVA PARTIDA\n";
+            cout << "   2- CARGAR\n";
+            cout << "   3- LIDERES DE GIMNASIO\n";
+            cout << "   0- SALIR \n";
             cuadro(1, 30, 1, 8);
             cout << endl;
             cout << "   opcion>>";
@@ -74,20 +78,20 @@ int main()
                 cout << "Puntajes:\n";
                 mostrarPartidasGuardadas();
                 /*player.cargarpartidaantigua()*/
-
                 break;
 
             case 3:
-                cout << "Sin hacer\n";
+                system("cls");
+                uno.listarLider(&uno);
                 break;
 
             case 0:
-                cout << "Salir.\n";
+                cout << "SALIR.\n";
                 return 0;
                 break;
 
             default:
-                cout << "Opcion incorrecta.\n";
+                cout << "OPCION INCORRECTA.\n";
             }
             system("pause");
             /// fin menu inicial.
@@ -106,11 +110,9 @@ int main()
         cout << endl;
         cout << "   opcion>> ";
         cin >> opc;
-
         switch(opc)
         {
         case 1:
-
             Main.gamePlay(player);
             if(Main.getGanador() == 1) {
                 cout << "Ganador Jugador !!\n";
@@ -122,13 +124,16 @@ int main()
                 cout << "No hay ganador\n";
             }
             break;
+
         case 2:
             cout << "En construccion (: \n";
             break;
+
         case 0:
             cout << "Volver\n";
             flag = true;
             break;
+
         default:
             cout << "Comando Incorrecto\n";
             break;
@@ -137,9 +142,9 @@ int main()
         /// fin menu secundario.
 
     } while(true);
-
     // ----- //
-    return 0;
+
+return 0;
 }
 
 
