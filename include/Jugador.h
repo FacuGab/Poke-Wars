@@ -30,7 +30,7 @@ class Jugador
         Pokemon &getPokemon(int pos){ return _party[pos];}
         Pokemon &getRival(int pos){ return _rivales[pos];}
 
-    private:
+    protected :
         char _nombreJugador [30];
         char _nombrePokemon [30];
         int  _puntaje;

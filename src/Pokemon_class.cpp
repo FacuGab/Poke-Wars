@@ -8,14 +8,6 @@ using namespace std;
 #include "Pokemon_class.h"
 #include "Stats_Ataques_class.h"
 
-// sin uso por ahora _Estado[]
-const string _Estado[7] = {"Paralisis",///-	Parálisis (causado por un ataque de tipo Eléctrico)
-                            "Quemado",   ///-	Quemado (causado por un ataque de tipo Fuego)
-                            "Envenenado",///-	Envenenado (causado por un ataque de tipo Bicho)
-                            "Confundido",///-	Confundido (causado por un ataque de tipo Tierra)
-                            "Congelado", ///-	Congelado (causado por un ataque de tipo Agua)
-                            "Dormido",   ///-	Dormido (causado por un ataque de tipo Planta)
-                            "Normal"};   ///-   Sin Efectos
 
 //{ CONSTRUCTOR Y METODOS:
 Pokemon::Pokemon()
@@ -26,7 +18,6 @@ Pokemon::Pokemon()
     _vida = 0;
     _resistencia = 0;
     _ataques = NULL;
-    _estado = "Nada"; // sin uso por ahora
 }
 Pokemon::Pokemon(const char * nom, int ID, int tipo, int vida, int res, Ataque * atq)
 {
@@ -36,7 +27,6 @@ Pokemon::Pokemon(const char * nom, int ID, int tipo, int vida, int res, Ataque *
     _vida = vida;
     _resistencia = res;
     _ataques = atq;
-    _estado = "Normal"; // sin uso por ahora
 }
 
 /// METODOS:
@@ -87,10 +77,6 @@ int Pokemon::getResistencia()
 Ataque * Pokemon::getAtaques(){
     return _ataques;
 }
-///Estados
-string Pokemon::getEstado(){
-    return _estado;
-}
 //}
 
 //{ SETS:
@@ -122,9 +108,5 @@ void Pokemon::setResistencia(int num){
 ///Ataque
 void Pokemon::setAtaque (Ataque * atq){
     _ataques = atq;
-}
-///Estado
-void Pokemon::setEstado (string str){
-    _estado = str;
 }
 //}

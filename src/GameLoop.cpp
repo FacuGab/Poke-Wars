@@ -8,24 +8,13 @@ using namespace std;
 #include "GameLoop.h"
 #include "Funciones.h"
 
-//{ Constructor y Destructor (sin usos por ahora):
-GameLoop::GameLoop()
-{
-    //ctor
-}
-
-GameLoop::~GameLoop()
-{
-    //dtor
-}
-//}
 
 //{ Metodos:
 
 /// LOOP DE BATALLA
 void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
 {
-    ///Variables Locales
+    /// VARIABLES LOCALES:
     srand (time(NULL));
     for(int i = 0; i < 4; i++) {jugador.setEstado(i, true);} /// Ponemos todos los pokemons disponibles al inicio de un loop de batalla
     _pkJugador = &jugador.getPokemon(0);
@@ -38,8 +27,11 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
     int vidaRivalInicial = vidaRival;
     int quit = 1;
     int posPoke = 0;
+    int cantVictoria = 0;
+    bool flagIntro = true;
 
-    /*Aca podria ir un metodo de pre-batalla, el cual muetra quienes van a pelar, alguna que otra estadisitca y comenta algunas reglas del juego ¿?*/
+    /// INTRO BATALLA
+    introBatalla(flagIntro);
 
     // Loop:
     while(quit != 0) {
@@ -48,7 +40,7 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
         system("cls");
         cout << "\t BATALLA: \n";
         cout << "============================\n";
-        cout << "Jugador 1\n";
+        cout << jugador.getNombreJugador();
         _pkJugador->Mostrar(vidaJugador);
         cout << endl;
         cout << "----------------------------\n";
@@ -62,7 +54,7 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
         /// ASIGNAMOS TURNO:
         switch( asignarTurno() ) {
 
-        /// TURNO JUGADOR:
+          /// TURNO JUGADOR:
         case 1:
             cout << "····Turno Jugador····\n";
             setInput(); /// Input de Jugador
@@ -73,7 +65,7 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
             }
 
             break;
-        /// TURNO RIVAL:
+          /// TURNO RIVAL:
         case 0:
             cout << endl;
             cout << "····Turno Rival····\n";
@@ -83,6 +75,7 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
         }
         /// CONTROLAMOS VIDA Y SI DA TRUE, CONTROLAMOS QUIEN GANA Y SI CONTINUAN LOS COMBATES
         if ( controlVida( vidaJugador, vidaRival ) ) {
+
             cout << "=========================\n";
             if(vidaJugador <= 0) {
                 jugador.setEstado(posPoke, false);
@@ -91,9 +84,11 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
             }
             if(vidaRival <= 0) {
                 cout << "Pokemon de Rival debilitado!!\n";
-                cout << "GANADOR: Jugador!\n";
+                cout << "GANADOR: " << jugador.getNombreJugador() << endl;
+                cantVictoria ++;
             }
             Sleep(500);
+
             /// PREGUNTAMOS SI QUEREMOS CONTINUAR LA BATALLA UNA VEZ QUE UN JUGADOR PIERDE
              /// MEDIANTE EL METODO siguienteBatalla(), podemos elegir otro pokemon si quremos continuar la batallas
             siguienteBatalla(vidaJugador, vidaRival, quit, jugador, vidaRivalInicial, posPoke);
@@ -105,21 +100,12 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
 
     system("cls");
     gotoxy(2, 2);
-    cout << "########################\n\n";
-    cout << "  RESULTADO: \n";
-    cout << "  Jugador 1\n";
-    cout << "  Nombre: " << _pkJugador->getNombre() << endl;
-    cout << "  Vida Final: ";
-    if(vidaJugador < 0) cout << "0\n";
-    else cout << vidaJugador << endl;
+    cout << "#########################\n\n";
+    cout << "  RESULTADOS: \n";
+    cout << "  JUGADOR: " << _pkJugador->getNombre() << endl;
+    cout << "  Cantidad de Victorias: " << cantVictoria << endl;
     cout << endl;
-    cout << "  Enemigo\n";
-    cout << "  Nombre: " << _pkRival->getNombre() << endl;
-    cout << "  Vida final: ";
-    if(vidaRival < 0) cout << "0\n";
-    else cout << vidaRival << endl;
-    cout << endl;
-    cuadro(1, 25, 1, 13);
+    cuadro(1, 27, 1, 9);
     cout << endl;
     system("pause");
 }
@@ -158,10 +144,15 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jug
             int opc;
             cout << "Siguente Batalla!\n";
             cout << "Elige un pokemon:\n";
-            for(int i = 0; i < 4; i++) {cout<< i+1 <<" - "<< jugador.getPokemon(i).getNombre()<<endl;}
+
+            for(int i = 0; i < 4; i++) {
+                cout<< i+1 <<" - "<< jugador.getPokemon(i).getNombre()<<endl;
+            }
+
             cout << "Ingresa una opcion del 1 al 4 para elegir\n";
             cout << ">>";
             cin >> opc;
+
             /// seleccionar otro pokemon que no este debil
             if(opc > 0 && opc < 5){
                 if(jugador.getEstado(opc-1) == false){
@@ -239,7 +230,7 @@ int GameLoop::calcularDanio(int danio, int defensa, int pres)
         cout << "Coeficiente aleatorio: " << aleatorio << endl;
         cout << "calculo de defnesa: " << (defensa * aleatorio) + defAleatorea << endl;
         cout << "pre-daño: " << calculo << endl;
-        calculoFinal = tipoDanio(calculo);
+        calculoFinal = tipoDanio(calculo); /// buscamos si hay mas daño por tipo
         cout << "daño final: " << calculoFinal << endl;
         if( calculoFinal > 0 ) {
             return calculoFinal;
@@ -263,7 +254,38 @@ int GameLoop::tipoDanio(int preDanio)
     TIERRA    = 5, fuerte contra electrico
     NORMAL    = 6  fuerte contra tierra
     */
-    // FALTA HACER, por ahora no hace ningun cambio
+    int tipoRival = _pkRival->getTipo();
+    int tipoAtaque = _pkJugador->getAtaques()[getInput()-1].getTipo();
+
+    if(tipoRival == 0 && tipoAtaque == 1) {
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+    if(tipoRival == 1 && tipoAtaque == 3) {
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+    if(tipoRival == 2 && tipoAtaque == 0) {
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+    if(tipoRival == 3 && tipoAtaque == 5) {
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+    if(tipoRival == 4 && tipoAtaque == 2) {/// sin uso
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+    if(tipoRival == 5 && tipoAtaque == 6) {/// sin uso
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+    if(tipoRival == 6 && tipoAtaque == 6) {/// sin uso
+        cout << "Es super efectivo!\n";
+        return preDanio*2;
+    }
+
     return preDanio;
 }
 
@@ -407,6 +429,28 @@ bool GameLoop::guardarPartidaFinalizada(const char* nJug, const char *nPk, int p
 {
     Jugador aux(nJug, nPk, puntos);
     return aux.guardarPartida();
+}
+
+/// INTRO BATALLA
+void GameLoop::introBatalla(bool &flag)
+{
+    if(flag){
+        system("cls");
+        gotoxy(2,2);
+        cout << "Estas A punto de iniciar una Batalla Pokemon!!\n";
+        cout << "  Estas consisten en batallas 1vs1 por turnos, en las cuales puedes elegir entre 4 ataques que \n";
+        cout << "  tiene tu pokemon a efectuar, estos mismos tienen una posibilidad de golpear o no dependiendo de su Precisión.\n";
+        cout << "  Los ataques causan daño dependiendo de su potencia, la defensa del rival y un coeficiente\n";
+        cout << "  aleatorio que se determina durante cada turno.\n";
+        cout << "  Estos pueden ser usados un numero limitado de veces, los mas potentes tienen menor precisión y\n";
+        cout << "  los de menor potencia mayor, usalos con inteligencia.\n";
+        cout << "  Ademas si el ataque que se realiza tiene ventaja sobre el tipo del pokemon rival, se causa doble daño.\n";
+        cout << "  Por eso es importante conocer los tipos de ventaja que se tiene a la hora de pelear.\n";
+        cuadro(1, 110, 1, 11);
+        cout << endl;
+        system("pause");
+        flag = false;
+    }
 }
 
 //}

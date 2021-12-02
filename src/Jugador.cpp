@@ -61,19 +61,25 @@ void Jugador::cargar()
     cout<< "    ### INGRESE NOMBRE JUGADOR ###"<< endl;
     cout << "       Nombre: ";
     cin >> _nombreJugador;
-    system("cls");
-    gotoxy(2,2);
-    cout << "HOLA " << _nombreJugador << "!, bienvenido a POKEWARS, por favor elige tus pokemons para poder jugar.\n";
-    cuadro(1, 82, 1, 4);
-    cout << endl;
-    system("pause");
+
 }
+
 
 /// Eleccion de Pokemons:
 void Jugador::eleccion()
 {
     bool flag = true;
     int opcion;
+
+//Esto estaba en carga jugador
+     system("cls");
+    gotoxy(2,2);
+    cout << "HOLA " << _nombreJugador << "!, bienvenido a POKEWARS, por favor elige tus pokemons para poder jugar.\n";
+    cuadro(1, 82, 1, 4);
+    cout << endl;
+    system("pause");
+
+
     do
     {
         system("cls");

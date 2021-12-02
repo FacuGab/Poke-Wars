@@ -6,14 +6,11 @@
 class GameLoop
 {
     public:
-        /// COSNTRUCTOR y DESTRUCTOR
-        GameLoop(); /// Sin uso por ahora
-        ~GameLoop(); /// Sin uso por ahora
-
         /// METODOS
         void gamePlay(Jugador&);
         void ataquesJugador(int &vidaPokRival);
         void ataquesRival(int &vidaPokJugador);
+        void introBatalla(bool &);
          int asignarTurno();
          int calcularDanio(int p_danio, int p_defensa, int pres);
         bool controlVida(int p_vidaJugador, int p_vidaRival);
@@ -28,10 +25,10 @@ class GameLoop
          int getGanador();
 
     private:
-    Pokemon* _pkJugador;
-    Pokemon* _pkRival;
-        int _vidaPkJugador; ///sin uso por ahora
-        int _vidaPkRival; ///sin uso por ahora
+     Pokemon* _pkJugador;
+     Pokemon* _pkRival;
+        int _vidaPkJugador;
+        int _vidaPkRival;
         int _input;
         int _ganador;
         int _loop = 0;

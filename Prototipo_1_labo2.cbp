@@ -36,6 +36,7 @@
 		<Unit filename="include/Funciones.h" />
 		<Unit filename="include/GameLoop.h" />
 		<Unit filename="include/Jugador.h" />
+		<Unit filename="include/Lideres.h" />
 		<Unit filename="include/Pokemon_class.h" />
 		<Unit filename="include/Stats_Ataques_class.h" />
 		<Unit filename="include/Utiles.h" />
@@ -43,6 +44,7 @@
 		<Unit filename="src/Funciones.cpp" />
 		<Unit filename="src/GameLoop.cpp" />
 		<Unit filename="src/Jugador.cpp" />
+		<Unit filename="src/Lideres.cpp" />
 		<Unit filename="src/Pokemon_class.cpp" />
 		<Extensions />
 	</Project>

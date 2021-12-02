@@ -6,47 +6,48 @@ using namespace std;
 #include "Funciones.h"
 #include "Jugador.h"
 
-
-void gotoxy(short px, short py){
+/// POS
+void gotoxy(short px, short py)
+{
     COORD pos;
     pos.X = px;
     pos.Y = py;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-void cuadro(int coluna1, int columna2, int fila1, int fila2){
+/// CUADRO
+void cuadro(int coluna1, int columna2, int fila1, int fila2)
+{
 
-    for(int col = coluna1; col <= columna2; col++)
-    {
-        for(int fil = fila1; fil <= fila2; fil++)
-        {
+    for(int col = coluna1; col <= columna2; col++) {
+        for(int fil = fila1; fil <= fila2; fil++) {
             gotoxy(col, fil);
-            if((col == coluna1 || col == columna2) && (fil != fila1 || fil != fila2)){
+            if((col == coluna1 || col == columna2) && (fil != fila1 || fil != fila2)) {
                 cout << "|";
-            }else if((fil == fila1 || fil == fila2) && (col != coluna1 || col != columna2)){
+            } else if((fil == fila1 || fil == fila2) && (col != coluna1 || col != columna2)) {
                 cout << "--";
             }
         }
     }
 }
 
-void cuadroPuntos(int coluna1, int columna2, int fila1, int fila2){
+/// CUADROS
+void cuadroPuntos(int coluna1, int columna2, int fila1, int fila2)
+{
 
-
-    for(int col = coluna1; col <= columna2; col++)
-    {
-        for(int fil = fila1; fil <= fila2; fil++)
-        {
+    for(int col = coluna1; col <= columna2; col++) {
+        for(int fil = fila1; fil <= fila2; fil++) {
             gotoxy(col, fil);
-            if((col == coluna1 || col == columna2) && (fil != fila1 || fil != fila2)){
+            if((col == coluna1 || col == columna2) && (fil != fila1 || fil != fila2)) {
                 cout << "·";
-            }else if((fil == fila1 || fil == fila2) && (col != coluna1 || col != columna2)){
+            } else if((fil == fila1 || fil == fila2) && (col != coluna1 || col != columna2)) {
                 cout << "·";
             }
         }
     }
 }
 
+/// INTRO
 void intro()
 {
     short titulo[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -83,48 +84,52 @@ void intro()
     Sleep(1500);
     system("pause");
     cout << "·····································································\n";
-    while(flag)
-    {
-        if(kbhit()) {flag = false;}
+    while(flag) {
+        if(kbhit()) {
+            flag = false;
+        }
         gotoxy(0,4);
-        switch(itr)
-        {
-            case 1:
+        switch(itr) {
+        case 1:
 
-                for(int a = 1; a < 840; a++) {
-                    if(a == 70) cout << endl;
-                    else if (a == 140) cout << endl;
-                    else if (a == 210) cout << endl;
-                    else if (a == 280) cout << endl;
-                    else if (a == 350) cout << endl;
-                    else if (a == 420) cout << endl;
-                    else if (a == 490) cout << endl;
-                    else if (a == 560) cout << endl;
-                    else if (a == 630) cout << endl;
-                    else if (a == 700) cout << endl;
-                    else if (a == 770) cout << endl;
-                    else if (a == 840) cout << endl;
-                    else {(titulo[a] == 1)? cout << " " : cout << "#";}
+            for(int a = 1; a < 840; a++) {
+                if(a == 70) cout << endl;
+                else if (a == 140) cout << endl;
+                else if (a == 210) cout << endl;
+                else if (a == 280) cout << endl;
+                else if (a == 350) cout << endl;
+                else if (a == 420) cout << endl;
+                else if (a == 490) cout << endl;
+                else if (a == 560) cout << endl;
+                else if (a == 630) cout << endl;
+                else if (a == 700) cout << endl;
+                else if (a == 770) cout << endl;
+                else if (a == 840) cout << endl;
+                else {
+                    (titulo[a] == 1)? cout << " " : cout << "#";
                 }
+            }
             itr = 2;
             break;
-            case 2:
+        case 2:
 
-                for(int a = 1; a < 840; a++) {
-                    if(a == 70) cout << endl;
-                    else if (a == 140) cout << endl;
-                    else if (a == 210) cout << endl;
-                    else if (a == 280) cout << endl;
-                    else if (a == 350) cout << endl;
-                    else if (a == 420) cout << endl;
-                    else if (a == 490) cout << endl;
-                    else if (a == 560) cout << endl;
-                    else if (a == 630) cout << endl;
-                    else if (a == 700) cout << endl;
-                    else if (a == 770) cout << endl;
-                    else if (a == 840) cout << endl;
-                    else {(titulo2[a] == 1)? cout << " " : cout << "#";}
+            for(int a = 1; a < 840; a++) {
+                if(a == 70) cout << endl;
+                else if (a == 140) cout << endl;
+                else if (a == 210) cout << endl;
+                else if (a == 280) cout << endl;
+                else if (a == 350) cout << endl;
+                else if (a == 420) cout << endl;
+                else if (a == 490) cout << endl;
+                else if (a == 560) cout << endl;
+                else if (a == 630) cout << endl;
+                else if (a == 700) cout << endl;
+                else if (a == 770) cout << endl;
+                else if (a == 840) cout << endl;
+                else {
+                    (titulo2[a] == 1)? cout << " " : cout << "#";
                 }
+            }
             itr = 1;
             break;
         }
@@ -190,6 +195,34 @@ void intro()
     }*/
 }
 
+/// GANADOR
+void ganador(const char* nombre) /// SIN USO
+{
+    int cont = 1;
+    bool flag = true;
+    char guion = '-';
+    char asterisco = '#';
+    system("cls");
+    cout << "Pokemon de Rival debilitado!!\n";
+    cout << "GANADOR:\n";
+    while(flag) {
+        if(kbhit()) {
+            flag = false;
+        }
+        gotoxy(2, 2);
+        if(cont == 1) {
+            cout << guion << guion << guion << guion << " " <<nombre<< " " << asterisco << asterisco << asterisco << asterisco << endl;
+            cont --;
+            Sleep(500);
+        } else {
+            cout << asterisco << asterisco << asterisco << asterisco << " " <<nombre<< " " <<  guion << guion << guion << guion<< endl;
+            cont ++;
+            Sleep(500);
+        }
+    }
+}
+
+/// MOSTRAR PARTIDAS GUARDADAS
 void mostrarPartidasGuardadas()
 {
     cout << "     --##################--"<<endl;
@@ -200,6 +233,6 @@ void mostrarPartidasGuardadas()
     Jugador partida;
     int pos = 0;
     while(partida.cargarPartida(pos++) == true) {
-            partida.mostrar();
+        partida.mostrar();
     }
 }
