@@ -11,7 +11,7 @@ using namespace std;
 Ataque pikachudAtaques[4] = { Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe fisico"),                                   //pos 0
                               Ataque(false, "Rasguño", 55, 10, NORMAL, 80, "Ataque con las garras"),                        //pos 1
                               Ataque(false, "Ataque Rapido", 45, 10, NORMAL, 99, "Ataque no puede fallar"),                 //pos 2
-                              Ataque(true, "Impacto Trueno", 90, 10, ELECTRICO, 70, "Impacto Electrico, puede paralizar")}; //pos 3
+                              Ataque(true, "Impacto Trueno", 90, 10, ELECTRICO, 69, "Impacto Electrico, puede paralizar")}; //pos 3
 
 Ataque bulbasaurAtaques[4] = {Ataque(false, "Tacle", 50, 25, NORMAL, 95, "Golpe fisico"),
                               Ataque(false, "Hojas Navajas", 50, 25, PLANTA, 95, "Ataque con hojas afiladas"),
