@@ -5,6 +5,7 @@
 using namespace std;
 #include "Funciones.h"
 #include "Jugador.h"
+#include <ctime>
 
 /// POS
 void gotoxy(short px, short py)
@@ -195,44 +196,62 @@ void intro()
     }*/
 }
 
-/// GANADOR
-void ganador(const char* nombre) /// SIN USO
-{
-    int cont = 1;
-    bool flag = true;
-    char guion = '-';
-    char asterisco = '#';
-    system("cls");
-    cout << "Pokemon de Rival debilitado!!\n";
-    cout << "GANADOR:\n";
-    while(flag) {
-        if(kbhit()) {
-            flag = false;
-        }
-        gotoxy(2, 2);
-        if(cont == 1) {
-            cout << guion << guion << guion << guion << " " <<nombre<< " " << asterisco << asterisco << asterisco << asterisco << endl;
-            cont --;
-            Sleep(500);
-        } else {
-            cout << asterisco << asterisco << asterisco << asterisco << " " <<nombre<< " " <<  guion << guion << guion << guion<< endl;
-            cont ++;
-            Sleep(500);
-        }
-    }
-}
-
 /// MOSTRAR PARTIDAS GUARDADAS
 void mostrarPartidasGuardadas()
 {
-    cout << "     --##################--"<<endl;
-    cout << "       PARTIDAS GUARDADAS"<<endl;
-    cout << "     --##################--"<<"\n\n";
-    cout << " Nombre"<<"   "<<" Nombre  "<<"   "<<"Puntaje"<<endl;
-    cout << " Jugador"<<"  "<<" Pokemon "<<"   "<<"obtenido  ""\n"<<endl;
+    cout << "                --##################--"<<endl;
+    cout << "                  PARTIDAS GUARDADAS"<<endl;
+    cout << "                --##################--"<<"\n\n";
+    cout << "NOMBRE  "<<"   "<<"ULTIMO  "<<"    "<<"PUNTAJE "<<"   "<<"  FECHA" <<"    "<<"    HORA"<<" " <<endl;
+    cout << "JUGADOR "<<"   "<<"POKEMON"<<"     "<<"OBTENIDO"<<"   "<<"  PARTIDA"<<"   "<<"   PARTIDA"<<" "<<endl;
     Jugador partida;
     int pos = 0;
-    while(partida.cargarPartida(pos++) == true) {
-        partida.mostrar();
+    while(partida.cargarPartida(pos++)) {
+            partida.mostrar();
     }
+}
+/// SACAMOS FECHA/HORA DEL SISTEMA
+void obtenerFechaHora(int &dia, int &mes, int &anio, int &hora, int &minuto)
+{
+    time_t t;
+    t = time(NULL);
+    struct tm *fecha;
+    fecha = localtime(&t);
+
+    dia=fecha->tm_mday;
+    mes=fecha->tm_mon+1;
+    anio=fecha->tm_year+1900;
+    hora=fecha->tm_hour;
+    minuto=fecha->tm_min;
+}
+
+/// TIPO
+string tipo(int tipo)
+{
+    string tp;
+    switch(tipo)
+    {
+    case 0:
+        tp = "FUEGO";
+        break;
+    case 1:
+        tp = "AGUA";
+        break;
+    case 2:
+        tp = "PLANTA";
+        break;
+    case 3:
+        tp = "ELECTRICO";
+        break;
+    case 4:
+        tp = "BICHO";
+        break;
+    case 5:
+        tp = "TIERRA";
+        break;
+    case 6:
+        tp = "NORMAL";
+        break;
+    }
+    return tp;
 }

@@ -2,17 +2,6 @@
 #define STATS_ATAQUES_CLASS_H_INCLUDED
 #include <cstring>
 
-///ESTADOS:
-enum ESTADOS
-{
-    Paralisis  = 0, ///(causado por un ataque de tipo Eléctrico)
-	Quemado    = 1, ///(causado por un ataque de tipo Fuego)
-	Envenenado = 2, ///(causado por un ataque de tipo Bicho)
-	Confundido = 3, ///(causado por un ataque de tipo Tierra)
-	Congelado  = 4, ///(causado por un ataque de tipo Agua)
-	Dormido    = 5  ///(causado por un ataque de tipo Planta)
-};
-
 ///TIPOS:
 enum TIPO
 {
