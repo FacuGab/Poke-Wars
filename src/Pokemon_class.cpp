@@ -33,7 +33,6 @@ Pokemon::Pokemon(const char * nom, int ID, int tipo, int vida, int res, Ataque *
 ///Mostrar
 void Pokemon::Mostrar(int ps)
 {
-
     cout << "NOMBRE: " << _nombre << endl;
     if(ps > 0){
          cout << "VIDA: " << ps << endl;

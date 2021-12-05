@@ -33,8 +33,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/Fecha.h" />
 		<Unit filename="include/Funciones.h" />
 		<Unit filename="include/GameLoop.h" />
+		<Unit filename="include/Hora.h" />
 		<Unit filename="include/Jugador.h" />
 		<Unit filename="include/Lideres.h" />
 		<Unit filename="include/Pokemon_class.h" />

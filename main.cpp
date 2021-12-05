@@ -1,12 +1,16 @@
-//Nombre: PROTOTIPO 1 Juego Labo2 "-- PokeMail --"
+//Nombre: PROTOTIPO "-- PokeWars --"
 /*
-PAUTAS DE AL DEFINIR VARIALBES, OBJETOS, FUNCIONES, ETC:
 
-- Objetos y Funciones: camelcase , PERO! los atri tienen que tener "_".
+INSTITUCION:
+-Universidad Tecnologica Nacional
 
-- Parametros: camelcase.
+MATERIA:
+- Laboratorio 2 de Programacion 2do cuatrimestre
 
-- Variables locales: sin mayuculas, sin guiones, ej: int numeroCutro, uso de camelcase !!!
+INTEGRANTES:
+- Facundo Gabriel Amarilla
+- Gaston
+- Roberto
 
 */
 
@@ -19,7 +23,6 @@ using namespace std;
 #include "Funciones.h"
 #include "Jugador.h"
 #include "Lideres.h"
-
 
 /// MAIN:
 int main()
@@ -40,7 +43,7 @@ int main()
     Lideres uno;
 
     /// Intro
-    intro();
+    //intro();
 
     // INICIO //
     do {
@@ -52,9 +55,9 @@ int main()
             cout << " ***JUEGO POKEMAIL***\n";
             cout << "  INGRESE OPCION: \n";
             cout << "   1- NUEVA PARTIDA\n";
-            cout << "   2- CARGAR\n";
+            cout << "   2- VER PUNTAJES\n";
             cout << "   3- LIDERES DE GIMNASIO\n";
-            cout << "   0- SALIR \n";
+            cout << "   0- SALIR\n";
             cuadro(1, 30, 1, 8);
             cout << endl;
             cout << "   opcion>>";
@@ -77,11 +80,12 @@ int main()
                 system("cls");
                 cout << "Puntajes:\n";
                 mostrarPartidasGuardadas();
-                /*player.cargarpartidaantigua()*/
                 break;
 
             case 3:
                 system("cls");
+                cout << "Comprueba si tus puntos se comparan a los grandes lideres de gimnacio!\n";
+                system("pause");
                 uno.listarLider(&uno);
                 break;
 
@@ -104,7 +108,8 @@ int main()
         cout << "*** JUEGO POKE-WARS ***\n";
         cout << "  Ingrese Opcion: \n";
         cout << "   1- Pelea\n";
-        cout << "   2- Estadisticas\n";
+        cout << "   2- Tus Pokemon Elegidos\n";
+        cout << "   3- Estadisticas Pokedex\n";
         cout << "   0- Volver\n";
         cuadro(1, 30, 1, 8);
         cout << endl;
@@ -126,7 +131,11 @@ int main()
             break;
 
         case 2:
-            cout << "En construccion (: \n";
+            player.estadisticaParty();
+            break;
+
+        case 3:
+            player.estadisticaPokedex();
             break;
 
         case 0:

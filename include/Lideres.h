@@ -7,8 +7,8 @@
 class Lideres : public Jugador
 {
 public:
-    Lideres(); /// sin uso
-    Lideres(const char* nomJugador, const char* nomPokemon, int puntos, const char* nombreMedalla, const char *nombreCiudad); /// sin uso por ahora
+    Lideres(); /// sin uso, sacar si al final no conflictua o sigue sin uso
+    Lideres(const char* nomJugador, const char* nomPokemon, int puntos, const char* nombreMedalla, const char *nombreCiudad); /// idem anterior
 
     void cargar();
     void mostrarLider();

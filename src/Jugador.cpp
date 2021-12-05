@@ -1,4 +1,5 @@
 //Nombre: Clase Jugador
+#include <iomanip>
 #include <iostream>
 using namespace std;
 #include "Pokemon_class.h"
@@ -6,7 +7,7 @@ using namespace std;
 #include "Utiles.h"
 #include "Funciones.h"
 
-/// Constructores:
+/// CONSTRUCTORES:
 Jugador::Jugador()
 {
     strcpy(_nombreJugador,"test1");
@@ -14,6 +15,9 @@ Jugador::Jugador()
     _itr = 0;
     _puntaje = 0;
     _rivales = pokedex;
+    for(int i = 0; i < 4; i++){
+        _party[i] = Pokemon();
+    }
 }
 
 Jugador::Jugador(const char* nomJugador, const char* nomPokemon, int puntos)
@@ -51,19 +55,26 @@ bool Jugador::cargarPartida(int pos)
 /// Mostrar Registros de Puntaje:
 void Jugador::mostrar()
 {
-    cout<<" "<<_nombreJugador<<" , "<<_nombrePokemon<<" ,  "<<_puntaje<<endl;
-    cout<<"*********************************"<<endl;
+    cout <<_nombreJugador<<"   ,  "<<_nombrePokemon<<"  ,    "<<_puntaje<< "    , "<<fechaPartida.getDia()<<"/"<<fechaPartida.getMes()<< "/"<<fechaPartida.getAnio()<<" ,  "<<horaPartida.getHora()<<":";
+
+    if(horaPartida.getMinuto() < 10) {
+        cout <<"0"<< horaPartida.getMinuto() <<endl;
+    }
+    else {
+        cout << horaPartida.getMinuto() <<endl;
+    }
+    cout<<"***************************************************************"<<endl;
 }
 
 /// Cargar Nombre de Jugador:
 void Jugador::cargar()
 {
-    cout<< "    ### INGRESE NOMBRE JUGADOR ###"<< endl;
+    cout << "    ### INGRESE NOMBRE JUGADOR ###" << endl;
+    cout << "       (5 letras maximo)\n";
     cout << "       Nombre: ";
     cin >> _nombreJugador;
 
 }
-
 
 /// Eleccion de Pokemons:
 void Jugador::eleccion()
@@ -71,17 +82,14 @@ void Jugador::eleccion()
     bool flag = true;
     int opcion;
 
-//Esto estaba en carga jugador
-     system("cls");
+    system("cls");
     gotoxy(2,2);
     cout << "HOLA " << _nombreJugador << "!, bienvenido a POKEWARS, por favor elige tus pokemons para poder jugar.\n";
-    cuadro(1, 82, 1, 4);
+    cuadro(1, 85, 1, 4);
     cout << endl;
     system("pause");
 
-
-    do
-    {
+    do{
         system("cls");
         cout << "-------------------------\n";
         cout << "ELIJA UN POKEMON: \n";
@@ -98,17 +106,26 @@ void Jugador::eleccion()
         case 1:
             system("cls");
             cout << "-------------------------\n";
-            cout << "Elige de entre 4 pokemons\n";
+            cout << "Elige de entre 6 pokemons\n";
             listaPokemon();
             cout << "-------------------------\n";
             cout << ">>";
-            cin >> opcion; // CUIDADO! no controla que opcion entra, se puede caer fuera del vector (-1 o 5 xejm)
+            cin >> opcion;
 
-            if(_itr < 4){
-            _party[_itr] = pokedex[opcion-1];
-            cout << "Pokemon elegido " << _party[_itr].getNombre() << "!!" << endl;
-            _itr++;
-            } else {cout << "Party llena.\n";}
+            if(_itr < 4) {
+                    bool f = false;
+                    for(int i = 0; i < 4; i++)
+                        { if( _party[i].getID() == pokedex[opcion-1].getID() ) f = true; }
+                    if(!f){
+                        _party[_itr] = pokedex[opcion-1];
+                        cout << "Pokemon elegido " << _party[_itr].getNombre() << "!!" << endl;
+                        _itr++;
+                    } else {
+                        cout << "Pokemon ya elegido!\n";
+                    }
+            } else {
+                cout << "Party llena.\n";
+            }
             system("pause");
             break;
 
@@ -132,3 +149,90 @@ void Jugador::cargarRival()
 {
     _rivales = pokedex;
 }
+
+/// ESTADISTICAS DEL POKEDEX:
+void Jugador::estadisticaPokedex()
+{
+    system("cls");
+    cout << "\t\t·························\n";
+    cout << "\t\t······P-O-K-E-D-E-X······\n";
+    cout << "\t\t·························\n";
+    cout << "-----------------------------------------------------------\n";
+    for(int i = 0; i < 6; i++)
+    {
+        cout << left;
+        cout << setw(12) << "NOMBRE";
+        cout << setw(12) << "ID";
+        cout << setw(12) << "TIPO";
+        cout << setw(12) << "VIDA";
+        cout << setw(12) << "RESISTENCIA";
+        cout << endl;
+        cout << left;
+        cout << setw(12) << pokedex[i].getNombre();
+        cout << setw(12) << pokedex[i].getID();
+        cout << setw(12) << tipo( pokedex[i].getTipo() );
+        cout << setw(12) << pokedex[i].getVida();
+        cout << setw(12) << pokedex[i].getResistencia();
+        cout << endl;
+        cout << "-----------------------------------------------------------\n";
+    }
+}
+
+/// ESTADISTICAS DE LOS POKEMON ELEGIDOS:
+void Jugador::estadisticaParty()
+{
+    system("cls");
+    cout << "\t·····························\n";
+    cout << "\t······T-U···E-Q-U-I-P-O······\n";
+    cout << "\t·····························\n";
+    cout << "============================================================\n";
+    cout << left;
+    cout << setw(12) << "NOMBRE";
+    cout << setw(12) << "ID";
+    cout << setw(12) << "TIPO";
+    cout << setw(12) << "VIDA";
+    cout << setw(12) << "RESISTENCIA";
+    cout << endl;
+    cout << "============================================================\n";
+    for(int i = 0; i < 4; i++)
+    {
+        cout << endl;
+        cout << left;
+        cout << setw(12) << _party[i].getNombre();
+        cout << setw(12) << _party[i].getID();
+        cout << setw(12) << tipo( _party[i].getTipo() );
+        cout << setw(12) << _party[i].getVida();
+        cout << setw(12) << _party[i].getResistencia();
+        cout << endl;
+        cout << "------------------------------------------------------------\n";
+    }
+    system("pause");
+    cout << endl;
+    cout << "············································································································\n";
+    cout << "\t\t\tA-T-A-Q-U-E-S:\n";
+    cout << "············································································································\n";
+    for(int x = 0; x < 4; x++)
+    {
+        cout <<"-"<< _party[x].getNombre() <<"-"<< endl;
+        cout << "------------------------------------------------------------------------------------------------------------\n";
+        cout << left;
+        cout << setw(16) << "Nombre";
+        cout << setw(16) << "Potencia";
+        cout << setw(16) << "Cantidad";
+        cout << setw(16) << "Tipo";
+        cout << setw(16) << "Precision";
+        cout << setw(24) << "Deescripcion";
+        cout << endl;
+        for(int j = 0; j < 4; j++){
+            cout << left;
+            cout << setw(16) << _party[x].getAtaques()[j].getNombre();
+            cout << setw(16) << _party[x].getAtaques()[j].getPotencia();
+            cout << setw(16) << _party[x].getAtaques()[j].getPP();
+            cout << setw(16) << _party[x].getAtaques()[j].getTipo();
+            cout << setw(16) << _party[x].getAtaques()[j].getPrec();
+            cout << setw(24) << _party[x].getAtaques()[j].getDesc();
+            cout << endl;
+        }
+    }
+}
+

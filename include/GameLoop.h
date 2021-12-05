@@ -15,7 +15,7 @@ class GameLoop
          int calcularDanio(int p_danio, int p_defensa, int pres);
         bool controlVida(int p_vidaJugador, int p_vidaRival);
         void siguienteBatalla(int &, int &, int &, Jugador &, int, int &);
-         int calcularPuntaje(int vidaRivalSano, int vidaRival,int puntos);
+         int calcularPuntaje(int vidaRivalSano, int vidaRival, int puntos, int acumulador);
         bool guardarPartidaFinalizada(const char* nJug,const char *nPk,int puntos);
          int tipoDanio(int);
 
