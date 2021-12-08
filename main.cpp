@@ -44,7 +44,7 @@ int main()
     rlutil::setColor(15);
 
     /// Intro
-    //intro();
+    intro();
 
     // INICIO //
     do {
