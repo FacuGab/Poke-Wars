@@ -61,7 +61,7 @@ Pokemon pokedex[9] = {Pokemon("Bulbasaur", 1, PLANTA, 65, 68, bulbasaurAtaques),
 
 void listaPokemon()
 {
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 6; i++)
     {
         cout << i+1 <<" "<< pokedex[i].getNombre() << endl;
     }

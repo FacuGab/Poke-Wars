@@ -21,6 +21,7 @@ class Jugador
         bool cargarPartida(int pos);
         void estadisticaPokedex();
         void estadisticaParty();
+        void reseteo();
 
         /// SETS Y GETS:
         void setNombreJugador(const char *nombreJugador){ strcpy(_nombreJugador, nombreJugador);}
@@ -45,7 +46,7 @@ class Jugador
         int  getPartidaAnio(){return fechaPartida.getAnio();}
 
     protected :
-        char _nombreJugador [6];
+        char _nombreJugador [30];
         char _nombrePokemon [30];
         int  _puntaje;
         Fecha fechaPartida;

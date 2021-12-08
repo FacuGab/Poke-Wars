@@ -42,6 +42,7 @@
 		<Unit filename="include/Pokemon_class.h" />
 		<Unit filename="include/Stats_Ataques_class.h" />
 		<Unit filename="include/Utiles.h" />
+		<Unit filename="include/rlutil.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Funciones.cpp" />
 		<Unit filename="src/GameLoop.cpp" />

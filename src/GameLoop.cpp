@@ -7,6 +7,7 @@ using namespace std;
 #include "Jugador.h"
 #include "GameLoop.h"
 #include "Funciones.h"
+#include "rlutil.h"
 
 
 //{ Metodos:
@@ -28,6 +29,7 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
     int quit = 1;
     int posPoke = 0;
     int cantVictoria = 0;
+    int puntaje = 0;
     bool flagIntro = true;
 
     /// INTRO BATALLA
@@ -38,9 +40,13 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
 
         /// MENU DE BATALLA CON LOS STATS
         system("cls");
+        rlutil::setColor(14);
         cout << "\t BATALLA: \n";
+        rlutil::setColor(10);
         cout << "============================\n";
+        rlutil::setColor(3);
         cout << jugador.getNombreJugador() << endl;
+        rlutil::setColor(10);
         _pkJugador->Mostrar(vidaJugador);
         cout << endl;
         cout << "----------------------------\n";
@@ -49,7 +55,9 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
         cout << endl;
         cout << "----------------------------\n";
         cout << "OPCIONES: \n";
+        rlutil::setColor(15);
         cout << " 1- Atacar\n 2- Pasar Turno\n 0- Salir\n";
+        rlutil::setColor(10);
 
         /// ASIGNAMOS TURNO:
         switch( asignarTurno() ) {
@@ -62,6 +70,8 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
                 quit = 0;
             } else if (_input == 1) {
                 ataquesJugador(vidaRival); /// Seleccion de Ataque y daño
+            } else {
+                cout << "Opcion Incorrecta, turno perdido!\n";
             }
 
             break;
@@ -79,21 +89,23 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
             cout << "=========================\n";
             if(vidaJugador <= 0) {
                 jugador.setEstado(posPoke, false);
+                rlutil::setColor(15);
                 cout << "Pokemon de Jugador debilitado!!\n";
                 cout << "GANADOR: Rival!\n";
             }
             if(vidaRival <= 0) {
+                rlutil::setColor(15);
                 cout << "Pokemon de Rival debilitado!!\n";
                 cout << "GANADOR: " << jugador.getNombreJugador() << endl;
                 cantVictoria ++;
             }
             Sleep(500);
-
-            /// PREGUNTAMOS SI QUEREMOS CONTINUAR LA BATALLA UNA VEZ QUE UN JUGADOR PIERDE
-             /// MEDIANTE EL METODO siguienteBatalla(), podemos elegir otro pokemon si quremos continuar la batallas
-            siguienteBatalla(vidaJugador, vidaRival, quit, jugador, vidaRivalInicial, posPoke);
+                /// PREGUNTAMOS SI QUEREMOS CONTINUAR LA BATALLA UNA VEZ QUE UN JUGADOR PIERDE
+                /// MEDIANTE EL METODO siguienteBatalla(), podemos elegir otro pokemon si quremos continuar la batallas
+            if(vidaRival < 0) vidaRival = 0;
+            siguienteBatalla(vidaJugador, vidaRival, quit, jugador, vidaRivalInicial, posPoke, puntaje);
         }
-        system("pause");
+        rlutil::anykey();
         _loop ++;
     }
     // fin de loop
@@ -101,13 +113,15 @@ void GameLoop::gamePlay(Jugador& jugador) // GamePlay de batalla
     system("cls");
     gotoxy(2, 2);
     cout << "#########################\n\n";
-    cout << "  RESULTADOS: \n";
-    cout << "  JUGADOR: " << jugador.getNombreJugador() << endl;
-    cout << "  Cantidad de Victorias: " << cantVictoria << endl;
+    rlutil::setColor(15);
+    cout << " RESULTADOS: \n";
+    cout << " JUGADOR: " << jugador.getNombreJugador() << endl;
+    cout << " Cantidad de Victorias: " << cantVictoria << endl;
     cout << endl;
-    cuadro(1, 27, 1, 9);
+    rlutil::setColor(10);
+    cuadro(1, 27, 1, 8);
     cout << endl;
-    system("pause");
+    rlutil::anykey();
 }
 
 /// CONTROL DE VIDA
@@ -125,20 +139,27 @@ bool GameLoop::controlVida(int p_vidaJugador, int p_vidaRival)
 }
 
 /// CONTROL DE SIGUIR LA BATALLA
-void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jugador &jugador, int vidaRivalInicio, int &pos)
+void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jugador &jugador, int vidaRivalInicio, int &pos, int &puntaje)
 {
-    int acumularPuntaje=jugador.getPuntaje();
+    bool flagPuntaje = true;
     bool flag = true;
+
     do {
         cout << endl;
+        rlutil::setColor(14);
+        cout << "Puntos al inicio de la batalla: " << puntaje << endl;
         cout << "Batalla terminada.\n";
+        rlutil::anykey();
+        if(flagPuntaje) {
+            rlutil::setColor(15);
+            puntaje = calcularPuntaje(vidaRivalInicio, vidaRival, puntaje);
+            flagPuntaje = false;
+        }
+        rlutil::setColor(10);
         cout << "Que desea hacer??\n";
         cout << "1- Continuar Batalla\n";
         cout << "2- Salir de Batalla\n";
         setInput();
-
-        int puntajeFinal = calcularPuntaje(vidaRivalInicio, vidaRival, jugador.getPuntaje(),acumularPuntaje);
-        acumularPuntaje+=puntajeFinal;
 
         switch(getInput())
         {
@@ -149,14 +170,14 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jug
             int opc;
             cout << "Siguente Batalla!\n";
             cout << "Elige un pokemon:\n";
-
-            for(int i = 0; i < 4; i++) {
-                cout<< i+1 <<" - "<< jugador.getPokemon(i).getNombre()<<endl;
-            }
-
+            rlutil::setColor(15);
+            for(int i = 0; i < 4; i++) { cout<< i+1 <<" - "<< jugador.getPokemon(i).getNombre()<<endl; }
+            rlutil::setColor(10);
             cout << "Ingresa una opcion del 1 al 4 para elegir\n";
             cout << ">>";
+            rlutil::setColor(15);
             cin >> opc;
+            rlutil::setColor(10);
 
             /// seleccionar otro pokemon que no este debil
             if(opc > 0 && opc < 5){
@@ -164,16 +185,24 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jug
                     cout << "Pokemon Debilitado, elige otro\n";
                     system("pause");
                 } else {
-                    _pkJugador = &jugador.getPokemon(opc-1);
-                    pos = opc - 1;
-                    cout << _pkJugador->getNombre() << " elegido !!\n";
-                    /// Cargamos la vida del pokemon jugador para la siguiente lucha
-                    vidaJugador = _pkJugador->getVida();
-                    /// Seleccionamos un nuevo rival para la lucha
-                    _pkRival = &jugador.getRival(rand() % 9 + 1);
-                    vidaRival = _pkRival->getVida();
-                    _loop = -1;
-                    flag = false;
+                    if(jugador.getPokemon(opc-1).getID() > 0) {
+                        _pkJugador = &jugador.getPokemon(opc-1);
+                        pos = opc - 1;
+                        cout << _pkJugador->getNombre() << " elegido !!\n";
+
+                        /// Cargamos la vida del pokemon jugador para la siguiente lucha
+                        vidaJugador = _pkJugador->getVida();
+
+                        /// Seleccionamos un nuevo rival para la lucha
+                        _pkRival = &jugador.getRival(rand() % 9);
+                        vidaRival = _pkRival->getVida();
+                        _loop = -1;
+                        flag = false;
+                    } else {
+                        cout << "No hay Pokemons en la opcion elegida!\n";
+                        system("pause");
+                    }
+
                 }
             } else {
                 cout << "Opcion Incorrecta\n";
@@ -184,9 +213,10 @@ void GameLoop::siguienteBatalla(int &vidaJugador, int &vidaRival, int &quit, Jug
         }
         case 2:{
             system("cls");
-            //int puntajeFinal = calcularPuntaje(vidaRivalInicio, vidaRival, jugador.getPuntaje(), acumularPuntaje);
-            if(guardarPartidaFinalizada(jugador.getNombreJugador(), jugador.getNombrePokemon(), puntajeFinal)){
+            cout << "Puntos antes de guardar: " << puntaje << endl;
+            if(guardarPartidaFinalizada(jugador.getNombreJugador(), jugador.getNombrePokemon(), puntaje)){
                     cout << "Partida Guardada Exitosamente\n";
+                    jugador.setPuntaje(puntaje);
                 } else {
                     cout << "Error al guardar la partida\n";
                 }
@@ -223,7 +253,9 @@ int GameLoop::calcularDanio(int danio, int defensa, int pres)
     int calculoFinal;
     float aleatorio = (rand() % 100 + 1);
     cout << endl;
+    rlutil::setColor(14);
     cout << " ######·CALCULANDO·######\n";
+    rlutil::setColor(10);
     Sleep(1000);
     int defAleatorea = (rand() % 20 + 1);
     cout << "Aleatorio: " << aleatorio << endl;
@@ -265,7 +297,7 @@ int GameLoop::tipoDanio(int preDanio)
     if(asignarTurno() == 0){
         tipoRival = _pkRival->getTipo();
         tipoAtaque = _pkJugador->getAtaques()[getInput()-1].getTipo();
-    }else{
+    }else if (asignarTurno() == 1){
         tipoRival = _pkJugador->getTipo();
         tipoAtaque = _pkRival->getAtaques()[getInput()-1].getTipo();
     }
@@ -274,7 +306,7 @@ int GameLoop::tipoDanio(int preDanio)
         cout << "Es super efectivo!\n";
         return preDanio*2;
     }
-    if(tipoRival == 1 && tipoAtaque == 3) {
+    if(tipoRival == 1 && tipoAtaque == 2) {
         cout << "Es super efectivo!\n";
         return preDanio*2;
     }
@@ -307,13 +339,16 @@ void GameLoop::ataquesJugador(int &vidaPokRival)
 {
     _damage = 0;
     int pp;
+    rlutil::setColor(15);
     cout << "Ataques de " << _pkJugador->getNombre() << endl;
     cout << "1- "<< _pkJugador->getAtaques()[0].getNombre() << endl;
     cout << "2- "<< _pkJugador->getAtaques()[1].getNombre() << endl;
     cout << "3- "<< _pkJugador->getAtaques()[2].getNombre() << endl;
     cout << "4- "<< _pkJugador->getAtaques()[3].getNombre() << endl;
+    rlutil::setColor(10);
     setInput();
-    switch(_input) {
+    switch(_input)
+    {
     case 1:
         if(_pkJugador->getAtaques()[0].getPP() > 0) {
             cout <<" ATAQUE: " << _pkJugador->getAtaques()[0].getNombre() << endl;
@@ -382,10 +417,12 @@ void GameLoop::ataquesJugador(int &vidaPokRival)
     Sleep(400);
     if( _damage > 0 ) {
         vidaPokRival -= _damage;
+        rlutil::setColor(15);
         cout << "Daño causado por Pokemon de Jugador: " << _damage << endl;
     } else {
         cout << "El ataque fallo. No causo Daño el ataque de Pokemon Jugador.\n";
     }
+    rlutil::setColor(10);
 }
 
 /// ELEGIR ATAQUES RIVAL
@@ -416,33 +453,43 @@ void GameLoop::ataquesRival(int &vidaPokJugador)
     Sleep(400);
     if( _damage > 0 ) {
         vidaPokJugador -= _damage;
+        rlutil::setColor(15);
         cout << "Daño causado por Pokemon de Rival: " << _damage << endl;
     } else {
         cout << "El ataque fallo. No causo Daño el ataque de Pokemon Rival.\n";
     }
+    rlutil::setColor(10);
 }
 
 /// CALCULAR PUNTAJE:
-int GameLoop::calcularPuntaje(int vidaRivalSano, int vidaRival, int puntos, int acumulador)
+int GameLoop::calcularPuntaje(int vidaRivalSano, int vidaRival, int acumulador)
 {
+    int puntosLocales = 0;
+    int puntosBatalla = 0;
+    int vidaRivalInicial = _pkRival->getVida();
     system("cls");
-    cout<< "***************"<<endl;
-    cout<< "vida del Rival Inicial: "<< vidaRivalSano <<endl;
-    if(vidaRival >= 0) cout<< "vida del Rival Restante: "<< vidaRival <<endl;
+    cout << "acumulador: "<< acumulador << endl;
+    cout<< "*************************************"<<endl;
+    cout<< "vida del Rival Inicial: "<< vidaRivalInicial <<endl;
+    if (vidaRival >= 0) cout<< "vida del Rival Restante: "<< vidaRival <<endl;
     else cout<< "vida del Rival Restante: 0"<<endl;
-    cout<< "***************"<<endl;
+    cout<< "*************************************"<<endl;
 
     if( vidaRival <= 0 ) {
-        puntos = vidaRivalSano + acumulador;
+        puntosBatalla = vidaRivalInicial;
+        puntosLocales = vidaRivalInicial + acumulador;
+    } else {
+        puntosBatalla = vidaRivalInicial - vidaRival;
+        puntosLocales = (vidaRivalInicial - vidaRival) + acumulador;
     }
-    else {
-        puntos = (vidaRivalSano - vidaRival) + acumulador;
-    }
+
     cout<< "*************************************"<<endl;
-    cout << "Puntaje obtenido en esta batalla: " << puntos <<endl;
+    cout << "Puntaje obtenido en esta batalla: ";
+    (puntosBatalla > 0) ? cout << puntosBatalla << endl : cout << "0\n";
     cout<< "*************************************"<<endl;
+    cout << puntosLocales << endl;
     system("pause");
-    return puntos;
+    return puntosLocales;
 }
 
 /// GUARDAR PARTIDA:
@@ -465,7 +512,8 @@ void GameLoop::introBatalla(bool &flag)
     if(flag){
         system("cls");
         gotoxy(2,2);
-        cout << "Estas A punto de iniciar una Batalla Pokemon!!\n";
+        rlutil::setColor(15);
+        cout << " Estas A punto de iniciar una Batalla Pokemon!!\n";
         cout << "  Estas consisten en batallas 1vs1 por turnos, en las cuales puedes elegir entre 4 ataques que \n";
         cout << "  tiene tu pokemon a efectuar, estos mismos tienen una posibilidad de golpear o no dependiendo de su Precisión.\n";
         cout << "  Los ataques causan daño dependiendo de su potencia, la defensa del rival y un coeficiente\n";
@@ -474,7 +522,8 @@ void GameLoop::introBatalla(bool &flag)
         cout << "  los de menor potencia mayor, usalos con inteligencia.\n";
         cout << "  Ademas si el ataque que se realiza tiene ventaja sobre el tipo del pokemon rival, se causa doble daño.\n";
         cout << "  Por eso es importante conocer los tipos de ventaja que se tiene a la hora de pelear.\n";
-        cuadro(1, 110, 1, 11);
+        rlutil::setColor(10);
+        cuadro(1, 113, 1, 11);
         cout << endl;
         system("pause");
         flag = false;
@@ -488,7 +537,9 @@ void GameLoop::introBatalla(bool &flag)
 void GameLoop::setInput()
 {
     cout << ">>";
+    rlutil::setColor(15);
     cin >> _input;
+    rlutil::setColor(10);
 }
 /// Get Input:
 int GameLoop::getInput()

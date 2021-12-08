@@ -1,4 +1,5 @@
 //Nombre:
+#include "rlutil.h"
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
@@ -6,6 +7,7 @@ using namespace std;
 #include "Funciones.h"
 #include "Jugador.h"
 #include <ctime>
+
 
 /// POS
 void gotoxy(short px, short py)
@@ -79,20 +81,25 @@ void intro()
                       };
     int itr = 1;
     bool flag = true;
+    short color = 9;
     cout << "Cargando sistema de micropagos ...\n";
     Sleep(1500);
     cout << "Robando informacion personal ...\n";
     Sleep(1500);
     system("pause");
     cout << "·····································································\n";
+
     while(flag) {
+
         if(kbhit()) {
             flag = false;
         }
-        gotoxy(0,4);
-        switch(itr) {
+        rlutil::locate(1,5);
+        switch(itr)
+        {
         case 1:
-
+            {
+            rlutil::setColor(color++);
             for(int a = 1; a < 840; a++) {
                 if(a == 70) cout << endl;
                 else if (a == 140) cout << endl;
@@ -112,8 +119,10 @@ void intro()
             }
             itr = 2;
             break;
+            }
         case 2:
-
+            {
+            rlutil::setColor(color--);
             for(int a = 1; a < 840; a++) {
                 if(a == 70) cout << endl;
                 else if (a == 140) cout << endl;
@@ -133,7 +142,10 @@ void intro()
             }
             itr = 1;
             break;
+            }
         }
+
+        rlutil::setColor(15);
         cout << endl;
         cout << "··· UN JUEGO CREADO POR EL CULTURAL TEAM CHANELL ···\n";
         cout << endl << "Pulsa cualquier tecla\n";
@@ -199,9 +211,11 @@ void intro()
 /// MOSTRAR PARTIDAS GUARDADAS
 void mostrarPartidasGuardadas()
 {
+    rlutil::setColor(14);
     cout << "                --##################--"<<endl;
     cout << "                  PARTIDAS GUARDADAS"<<endl;
     cout << "                --##################--"<<"\n\n";
+    rlutil::setColor(10);
     cout << "NOMBRE  "<<"   "<<"ULTIMO  "<<"    "<<"PUNTAJE "<<"   "<<"  FECHA" <<"    "<<"    HORA"<<" " <<endl;
     cout << "JUGADOR "<<"   "<<"POKEMON"<<"     "<<"OBTENIDO"<<"   "<<"  PARTIDA"<<"   "<<"   PARTIDA"<<" "<<endl;
     Jugador partida;

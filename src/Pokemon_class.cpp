@@ -7,6 +7,7 @@
 using namespace std;
 #include "Pokemon_class.h"
 #include "Stats_Ataques_class.h"
+#include "rlutil.h"
 
 
 //{ CONSTRUCTOR Y METODOS:
@@ -35,9 +36,16 @@ void Pokemon::Mostrar(int ps)
 {
     cout << "NOMBRE: " << _nombre << endl;
     if(ps > 0){
-         cout << "VIDA: " << ps << endl;
+
+         cout << "VIDA: ";
+         rlutil::setColor(12);
+         cout<< ps << endl;
+         rlutil::setColor(10);
     } else {
-         cout << "VIDA: 0" << endl;
+         cout << "VIDA: ";
+         rlutil::setColor(12);
+         cout << "0" << endl;
+         rlutil::setColor(10);
     }
     cout << "ATAQUE 1:" << _ataques[0].getNombre() << endl;
     cout << "ATAQUE 2:" << _ataques[1].getNombre() << endl;

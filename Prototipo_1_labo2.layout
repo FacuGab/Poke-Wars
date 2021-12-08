@@ -2,80 +2,36 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\Funciones.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\GameLoop.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="344" topLine="0" />
+			<Cursor1 position="1082" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Jugador.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="include\rlutil.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7668" topLine="77" />
+			<Cursor1 position="13458" topLine="439" />
+		</Cursor>
+	</File>
+	<File name="src\Funciones.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10252" topLine="22" />
 		</Cursor>
 		<Folding>
-			<Collapse line="11" />
-			<Collapse line="23" />
-			<Collapse line="31" />
-			<Collapse line="43" />
-			<Collapse line="56" />
-			<Collapse line="70" />
-			<Collapse line="80" />
-			<Collapse line="148" />
+			<Collapse line="22" />
+			<Collapse line="38" />
+			<Collapse line="54" />
+			<Collapse line="154" />
+			<Collapse line="243" />
 		</Folding>
 	</File>
-	<File name="src\Funciones.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="include\Utiles.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10417" topLine="1" />
+			<Cursor1 position="4366" topLine="35" />
 		</Cursor>
-		<Folding>
-			<Collapse line="11" />
-			<Collapse line="20" />
-			<Collapse line="52" />
-			<Collapse line="142" />
-			<Collapse line="200" />
-			<Collapse line="214" />
-			<Collapse line="229" />
-		</Folding>
-	</File>
-	<File name="include\Stats_Ataques_class.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="257" topLine="36" />
-		</Cursor>
-	</File>
-	<File name="src\GameLoop.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1226" topLine="81" />
-		</Cursor>
-		<Folding>
-			<Collapse line="114" />
-			<Collapse line="128" />
-			<Collapse line="210" />
-			<Collapse line="220" />
-			<Collapse line="251" />
-			<Collapse line="392" />
-			<Collapse line="426" />
-			<Collapse line="449" />
-			<Collapse line="463" />
-			<Collapse line="485" />
-		</Folding>
 	</File>
 	<File name="src\Lideres.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="284" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="include\Utiles.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4130" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3668" topLine="109" />
-		</Cursor>
-	</File>
-	<File name="include\Fecha.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="375" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\Lideres.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -83,33 +39,74 @@
 			<Cursor1 position="491" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Hora.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\GameLoop.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="638" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="128" />
+			<Collapse line="142" />
+			<Collapse line="240" />
+			<Collapse line="250" />
+			<Collapse line="338" />
+			<Collapse line="429" />
+			<Collapse line="537" />
+			<Collapse line="550" />
+		</Folding>
+	</File>
+	<File name="include\Hora.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="297" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Pokemon_class.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Funciones.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="646" topLine="6" />
+			<Cursor1 position="344" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="48" />
-			<Collapse line="80" />
-		</Folding>
 	</File>
-	<File name="include\Pokemon_class.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="752" topLine="84" />
+		</Cursor>
+	</File>
+	<File name="include\Fecha.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="375" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Pokemon_class.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="354" topLine="3" />
 		</Cursor>
 	</File>
 	<File name="include\Jugador.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="516" topLine="3" />
+			<Cursor1 position="575" topLine="8" />
 		</Cursor>
 	</File>
-	<File name="include\GameLoop.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Jugador.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="755" topLine="0" />
+			<Cursor1 position="9006" topLine="187" />
+		</Cursor>
+		<Folding>
+			<Collapse line="32" />
+			<Collapse line="44" />
+			<Collapse line="71" />
+			<Collapse line="166" />
+			<Collapse line="172" />
+		</Folding>
+	</File>
+	<File name="src\Pokemon_class.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="361" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="88" />
+		</Folding>
+	</File>
+	<File name="include\Stats_Ataques_class.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="257" topLine="36" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

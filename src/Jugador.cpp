@@ -6,6 +6,7 @@ using namespace std;
 #include "Jugador.h"
 #include "Utiles.h"
 #include "Funciones.h"
+#include "rlutil.h"
 
 /// CONSTRUCTORES:
 Jugador::Jugador()
@@ -70,9 +71,12 @@ void Jugador::mostrar()
 void Jugador::cargar()
 {
     cout << "    ### INGRESE NOMBRE JUGADOR ###" << endl;
-    cout << "       (5 letras maximo)\n";
-    cout << "       Nombre: ";
-    cin >> _nombreJugador;
+
+    cout << "       NOMBRE: ";
+    rlutil::setColor(15);
+    cin.ignore();
+    cin.getline(_nombreJugador, 30);
+    rlutil::setColor(10);
 
 }
 
@@ -84,41 +88,55 @@ void Jugador::eleccion()
 
     system("cls");
     gotoxy(2,2);
+    rlutil::setColor(15);
     cout << "HOLA " << _nombreJugador << "!, bienvenido a POKEWARS, por favor elige tus pokemons para poder jugar.\n";
+    rlutil::setColor(10);
     cuadro(1, 85, 1, 4);
     cout << endl;
     system("pause");
 
     do{
         system("cls");
+        rlutil::setColor(10);
         cout << "-------------------------\n";
+        rlutil::setColor(15);
         cout << "ELIJA UN POKEMON: \n";
         cout << "1- Elegir\n";
         cout << "2- Volver\n";
+        rlutil::setColor(10);
         cout << "-------------------------\n";
         cout << "Espacio en el party: " << 4 -_itr << endl;
         if(_itr == 3) cout << "Party llena, por favor eliga opcion Voler.\n";
         cout << " >>";
+        rlutil::setColor(15);
         cin >> opcion;
+        rlutil::setColor(10);
 
         switch(opcion)
         {
         case 1:
             system("cls");
             cout << "-------------------------\n";
+            rlutil::setColor(15);
             cout << "Elige de entre 6 pokemons\n";
             listaPokemon();
+            rlutil::setColor(10);
             cout << "-------------------------\n";
             cout << ">>";
+            rlutil::setColor(15);
             cin >> opcion;
+            rlutil::setColor(10);
 
             if(_itr < 4) {
                     bool f = false;
-                    for(int i = 0; i < 4; i++)
-                        { if( _party[i].getID() == pokedex[opcion-1].getID() ) f = true; }
+                    for(int i = 0; i < 4; i++) { if( _party[i].getID() == pokedex[opcion-1].getID() ) f = true; }
                     if(!f){
                         _party[_itr] = pokedex[opcion-1];
-                        cout << "Pokemon elegido " << _party[_itr].getNombre() << "!!" << endl;
+                        cout << "Pokemon elegido ";
+                        rlutil::setColor(15);
+                        cout << _party[_itr].getNombre();
+                        rlutil::setColor(10);
+                        cout << "!!" << endl;
                         _itr++;
                     } else {
                         cout << "Pokemon ya elegido!\n";
@@ -154,9 +172,11 @@ void Jugador::cargarRival()
 void Jugador::estadisticaPokedex()
 {
     system("cls");
+    rlutil::setColor(14);
     cout << "\t\t·························\n";
     cout << "\t\t······P-O-K-E-D-E-X······\n";
     cout << "\t\t·························\n";
+    rlutil::setColor(10);
     cout << "-----------------------------------------------------------\n";
     for(int i = 0; i < 6; i++)
     {
@@ -182,9 +202,11 @@ void Jugador::estadisticaPokedex()
 void Jugador::estadisticaParty()
 {
     system("cls");
+    rlutil::setColor(14);
     cout << "\t·····························\n";
     cout << "\t······T-U···E-Q-U-I-P-O······\n";
     cout << "\t·····························\n";
+    rlutil::setColor(10);
     cout << "============================================================\n";
     cout << left;
     cout << setw(12) << "NOMBRE";
@@ -208,31 +230,48 @@ void Jugador::estadisticaParty()
     }
     system("pause");
     cout << endl;
+    rlutil::setColor(14);
     cout << "············································································································\n";
     cout << "\t\t\tA-T-A-Q-U-E-S:\n";
     cout << "············································································································\n";
+    rlutil::setColor(10);
     for(int x = 0; x < 4; x++)
     {
-        cout <<"-"<< _party[x].getNombre() <<"-"<< endl;
-        cout << "------------------------------------------------------------------------------------------------------------\n";
-        cout << left;
-        cout << setw(16) << "Nombre";
-        cout << setw(16) << "Potencia";
-        cout << setw(16) << "Cantidad";
-        cout << setw(16) << "Tipo";
-        cout << setw(16) << "Precision";
-        cout << setw(24) << "Deescripcion";
-        cout << endl;
-        for(int j = 0; j < 4; j++){
+        if(_party[x].getAtaques() != NULL){
+            cout <<"-"<< _party[x].getNombre() <<"-"<< endl;
+            cout << "------------------------------------------------------------------------------------------------------------\n";
             cout << left;
-            cout << setw(16) << _party[x].getAtaques()[j].getNombre();
-            cout << setw(16) << _party[x].getAtaques()[j].getPotencia();
-            cout << setw(16) << _party[x].getAtaques()[j].getPP();
-            cout << setw(16) << _party[x].getAtaques()[j].getTipo();
-            cout << setw(16) << _party[x].getAtaques()[j].getPrec();
-            cout << setw(24) << _party[x].getAtaques()[j].getDesc();
+            cout << setw(16) << "Nombre";
+            cout << setw(16) << "Potencia";
+            cout << setw(16) << "Cantidad";
+            cout << setw(16) << "Tipo";
+            cout << setw(16) << "Precision";
+            cout << setw(24) << "Deescripcion";
             cout << endl;
+            for(int j = 0; j < 4; j++){
+                cout << left;
+                cout << setw(16) << _party[x].getAtaques()[j].getNombre();
+                cout << setw(16) << _party[x].getAtaques()[j].getPotencia();
+                cout << setw(16) << _party[x].getAtaques()[j].getPP();
+                cout << setw(16) << _party[x].getAtaques()[j].getTipo();
+                cout << setw(16) << _party[x].getAtaques()[j].getPrec();
+                cout << setw(24) << _party[x].getAtaques()[j].getDesc();
+                cout << endl;
+            }
         }
+    }
+}
+
+/// RESET
+void Jugador::reseteo()
+{
+    strcpy(_nombreJugador,"test1");
+    strcpy(_nombrePokemon,"test1");
+    _itr = 0;
+    _puntaje = 0;
+    _rivales = pokedex;
+    for(int i = 0; i < 4; i++){
+        _party[i] = Pokemon();
     }
 }
 
