@@ -44,7 +44,7 @@ int main()
     rlutil::setColor(15);
 
     /// Intro
-    intro();
+    //intro();
 
     // INICIO //
     do {
@@ -64,11 +64,11 @@ int main()
             cout << "   0- SALIR\n";
             cuadro(1, 30, 1, 9);
             cout << endl;
+            rlutil::setColor(13);
+            cout << "   OPCION>>";
+
             rlutil::setColor(10);
-            cout << "   opcion>>";
-            rlutil::setColor(15);
             cin >> opc2;
-            rlutil::setColor(10);
             switch(opc2)
             {
             case 1:
@@ -124,23 +124,23 @@ int main()
         rlutil::setColor(14);
         cout << "*** JUEGO POKE-WARS ***\n";
         rlutil::setColor(10);
-        cout << "  Ingrese Opcion: \n";
-        cout << "   1- Pelea\n";
-        cout << "   2- Tus Pokemon Elegidos\n";
-        cout << "   3- Estadisticas Pokedex\n";
-        cout << "   0- Volver\n";
+        cout << "  INGRESE OPCION: \n";
+        cout << "   1- PELEA\n";
+        cout << "   2- TUS POKEMON ELEGIDOS\n";
+        cout << "   3- ESTADISTICAS POKEDEX\n";
+        cout << "   0- VOLVER\n";
         cuadro(1, 30, 1, 8);
         cout << endl;
-        cout << "   opcion>> ";
-        rlutil::setColor(15);
+        rlutil::setColor(13);
+        cout << "   OPCION>> ";
         cin >> opc;
         rlutil::setColor(10);
         switch(opc)
         {
         case 1:
             Main.gamePlay(player);
-            cout << "Fin de Batallas!, ve a mirar la cantidad de puntos que acumulaste!\n";
-            cout << "Puntos: " << player.getPuntaje() << endl;
+            cout << "FIN DE BATALLAS!, VÉ A MIRAR LA CANTIDAD DE PUNTOS QUE ACUMULASTE!\n";
+            cout << "PUNTOS: " << player.getPuntaje() << endl;
             player.reseteo();
             break;
 
@@ -153,12 +153,12 @@ int main()
             break;
 
         case 0:
-            cout << "Volver\n";
+            cout << "VOLVER\n";
             flag = true;
             break;
 
         default:
-            cout << "Comando Incorrecto\n";
+            cout << "COMANDO INCORRECTO\n";
             break;
         }
         system("pause");

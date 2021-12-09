@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "Lideres.h"
+#include "rlutil.h"
 
 /// CONSTRUCTORES:
 
@@ -92,9 +93,11 @@ bool Lideres::listarLider(Lideres *uno)
         while(this->leerLider(pos++)) {
 
             this->mostrarLider();
+            rlutil::setColor(11);
             cout << endl;
             cout << "----------------------------------------"<<endl;
             cout << endl;
+            rlutil::setColor(10);
         }
         cout << " 1- VOLVER\n";
         cin>>input;

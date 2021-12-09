@@ -747,3 +747,99 @@
 	"Lideres.h"
 	"rlutil.h"
 
+1639071769 source:c:\users\gastona\downloads\poke-wars-main\poke-wars-main\main.cpp
+	<iostream>
+	<clocale>
+	<cstring>
+	<stdio.h>
+	"GameLoop.h"
+	"Funciones.h"
+	"Jugador.h"
+	"Lideres.h"
+	"rlutil.h"
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\gameloop.h
+	"Pokemon_class.h"
+	"Jugador.h"
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\pokemon_class.h
+	"Stats_Ataques_class.h"
+	<iostream>
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\stats_ataques_class.h
+	<cstring>
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\jugador.h
+	<cstring>
+	"Pokemon_class.h"
+	"Fecha.h"
+	"Hora.h"
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\fecha.h
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\hora.h
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\funciones.h
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\lideres.h
+	<Jugador.h>
+
+1638906416 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1638906416 source:c:\users\gastona\downloads\poke-wars-main\poke-wars-main\src\funciones.cpp
+	"rlutil.h"
+	<iostream>
+	<windows.h>
+	<conio.h>
+	"Funciones.h"
+	"Jugador.h"
+	<ctime>
+
+1639053086 source:c:\users\gastona\downloads\poke-wars-main\poke-wars-main\src\gameloop.cpp
+	<iostream>
+	<time.h>
+	<stdlib.h>
+	<windows.h>
+	"Jugador.h"
+	"GameLoop.h"
+	"Funciones.h"
+	"rlutil.h"
+
+1639063414 source:c:\users\gastona\downloads\poke-wars-main\poke-wars-main\src\jugador.cpp
+	<iomanip>
+	<iostream>
+	"Pokemon_class.h"
+	"Jugador.h"
+	"Utiles.h"
+	"Funciones.h"
+	"rlutil.h"
+
+1639065397 c:\users\gastona\downloads\poke-wars-main\poke-wars-main\include\utiles.h
+	"Pokemon_class.h"
+
+1639051218 source:c:\users\gastona\downloads\poke-wars-main\poke-wars-main\src\lideres.cpp
+	<iostream>
+	"Lideres.h"
+	"rlutil.h"
+
+1638906416 source:c:\users\gastona\downloads\poke-wars-main\poke-wars-main\src\pokemon_class.cpp
+	<iostream>
+	<cstring>
+	<stdio.h>
+	<iomanip>
+	"Pokemon_class.h"
+	"Stats_Ataques_class.h"
+	"rlutil.h"
+
